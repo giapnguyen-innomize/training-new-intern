@@ -30,15 +30,17 @@ This project provides information and is a place to store the results of the tra
 
 ### Task/Bug workflow
 
-Task/bug flow:
+#### Task/bug flow:
 
 1. Open/Backlogs
 2. Todo
 3. In Progress
 4. In Review/Revise
 5. Done/Closed
+   > [!NOTE]  
+   > One member should take only one task in progress at a time.
 
-Working flow:
+#### Working flow:
 
 1. Client/team member decide what task should be resolved via move the Open task to Todo.
 2. Team member pick task from Todo and move to In Progress.
@@ -48,12 +50,11 @@ Working flow:
 
 ### Daily report
 
-- what are three questions?
-- // please list out three question
-  - Should report what you already done in the end of a working day.
-  - The plans for the tomorrow.
-  - Got problems obstacles or not.
-    _post to group chat_
+- What tasks did you accomplish to day?
+- Did you encounter any problems, challenges?
+- The plans of working for tomorrow.
+  > [!NOTE]  
+  > Should post to group chat.
 
 ### Branch name
 
@@ -69,12 +70,11 @@ Working flow:
 
 ### Merge request
 
-- rule?
-  - Makes sure to provide a clear title that summarizes the changes.
-  - Discribes the purpose of the request.
-  - Assign to relevants reviewers.
-  - Makes sure all requirements are meet.
-    _In a team, all the members can reviews each other._
+- Makes sure to provide a clear title that summarizes the changes.
+- Discribes the purpose of the request.
+- Assign to relevants reviewers.
+- Makes sure all requirements are meet.
+- In a team, all the members can reviews each other.
 
 ### Communicate convention
 
