@@ -21,3 +21,9 @@ This is the [structure of the Mirai](https://docs.google.com/document/d/1Z-2Xbal
 ## prettier
 - What is the use of Prettier?
 - What is the Prettier?
+
+## Style guide
+### Airbnb JavaScript Style Guide
+Please refer here: https://github.com/airbnb/javascript
+### Google TypeScript Style Guide
+Please refer here: https://google.github.io/styleguide/tsguide.html
