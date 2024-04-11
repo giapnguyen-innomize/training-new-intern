@@ -14,11 +14,11 @@ This project provides information and is a place to store the results of the tra
   - Nx workspace is a development environment provided by the Nx toolset, designed for building and managing monorepos.
   - Nx workspace provides a structured environment for developing multiple projects within a single repository.
 - Folder structure of Nx Workspace?
-  - myorg/
-    ├── apps/
-    ├── libs/
-    ├── tools/
-    ├── nx.json
+  - myorg/  
+    ├── apps/  
+    ├── libs/  
+    ├── tools/  
+    ├── nx.json  
     └── tsconfig.base.json
   - `/apps/` contains the application projects. This is the main entry point for a runnable application.
   - `/libs/` contains the library projects.
@@ -26,13 +26,13 @@ This project provides information and is a place to store the results of the tra
   - `/nx.json` configures the Nx CLI itself. It tells Nx what needs to be cached, how to run tasks etc.
   - `/tsconfig.base.json` sets up the global TypeScript settings and creates aliases for each library to aid when creating TS/JS imports.
 - How many Library Types of Nx Workspace?
-  1. Application Libraries:
+  1. Application Libraries
   - These libraries contain code that compiles to an executable application.
   - Application libraries contain the source code for the application itself and are intended to be runnable.
-  2. Feature Libraries:
+  2. Feature Libraries
   - Feature libraries contain code that encapsulates specific features or functionalities within an application.
   - They are reusable across multiple applications within the workspace and can be imported and utilized as needed.
-  3. UI Libraries:
+  3. UI Libraries
   - These libraries contain reusable UI components, styles, and assets that can be shared across multiple applications within the workspace.
   - UI libraries help enforce consistency in the user interface and promote code reuse across projects.
 
