@@ -53,6 +53,7 @@ Working flow:
 - Explain what you are done
 - Make sure all files added 
 - The messages not the same with other commit
+- Do not commit to unrelated things
  
 ### Merge request
 - rule?
