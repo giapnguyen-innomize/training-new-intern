@@ -8,17 +8,17 @@ This project provides information and is a place to store the results of the tra
 
 ### Task template
 
-- requirement?
+- Requirement?
   - Describe the function you want the team to perform
   - If there are no specific requirements, it is necessary to provide a plan and request acceptance from the team/client before starting implementation.
-- definition of done
+- Definition of done
   - The definition of done (DoD) is when all conditions, or acceptance criteria, that a software product must satisfy are met and ready to be accepted by a team or client. We must meet the definition of done to ensure quality before updating the status to done
 
 ### Bug template
 
 - Name/titles of bugs:
   - Should be brief and use correct terms
-  - better is to include the name of the feature when you found this bug
+  - Better is to include the name of the feature when you found this bug
   - `[module][module] bug summary`
 - Steps to reproduce
 - Actual result
@@ -37,8 +37,7 @@ This project provides information and is a place to store the results of the tra
 3. In Progress
 4. In Review/Revise
 5. Done/Closed
-   > [!NOTE]  
-   > One member should take only one task in progress at a time.
+6. One member should take only one task in progress at a time.
 
 #### Working flow:
 
