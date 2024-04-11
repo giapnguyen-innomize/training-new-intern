@@ -2,5 +2,53 @@
   "extends": "nx/presets/npm.json",
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "defaultBase": "master",
-  "nxCloudAccessToken": "OGI4ZDMxZGUtYTk4Ni00YWE3LWFhYTQtMWEzNDc1NzI1NGZlfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "OGI4ZDMxZGUtYTk4Ni00YWE3LWFhYTQtMWEzNDc1NzI1NGZlfHJlYWQtd3JpdGU=",
+  "plugins": [
+    {
+      "plugin": "@nx/webpack/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview"
+      }
+    },
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    {
+      "plugin": "@nx/cypress/plugin",
+      "options": {
+        "targetName": "e2e",
+        "componentTestingTargetName": "component-test",
+        "ciTargetName": "e2e-ci",
+        "openTargetName": "open-cypress"
+      }
+    },
+    {
+      "plugin": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
+      }
+    }
+  ],
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "babel": true,
+        "style": "css",
+        "linter": "eslint",
+        "bundler": "webpack"
+      },
+      "component": {
+        "style": "css"
+      },
+      "library": {
+        "style": "css",
+        "linter": "eslint"
+      }
+    }
+  }
 }
