@@ -2,92 +2,22 @@
 
 This project provides information and is a place to store the results of the training process for new interns
 
-# DAY 1
+# DAY 2
 
-## Working process
 
-### Task template
+## NX Workspace
+- What are the benefits of a monorepo?
+- What is Nx workspace?
+- Folder structure of Nx Workspace?
+- How many Library Types of Nx Workspace?
+  (you can find all answer from https://nx.dev/)
 
-- Requirement?
-  - Describe the function you want the team to perform
-  - If there are no specific requirements, it is necessary to provide a plan and request acceptance from the team/client before starting implementation.
-- Definition of done
-  - The definition of done (DoD) is when all conditions, or acceptance criteria, that a software product must satisfy are met and ready to be accepted by a team or client. We must meet the definition of done to ensure quality before updating the status to done
+## Project structure (Mirai)
+This is the [structure of the Mirai](https://docs.google.com/document/d/1Z-2Xbalflmdkh8goqpnbECfZ4tGmDSN4s4ZjsKVxIW8/edit?usp=sharing) project, let's take a look at it
 
-### Bug template
+## eslint
+- What is ESLint used for?
 
-- Name/titles of bugs:
-  - Should be brief and use correct terms
-  - Better is to include the name of the feature when you found this bug
-  - `[module][module] bug summary`
-- Steps to reproduce
-- Actual result
-- Expected result
-- Assignee
-  - If you want to assign to a special user
-- Screenshot/attachments
-  - Not required but should have attachments
-
-### Task/Bug workflow
-
-#### Task/bug flow:
-
-1. Open/Backlogs
-2. Todo
-3. In Progress
-4. In Review/Revise
-5. Done/Closed
-6. One member should take only one task in progress at a time.
-
-#### Working flow:
-
-1. Client/team member decide what task should be resolved via move the Open task to Todo.
-2. Team member pick task from Todo and move to In Progress.
-3. Resolve task and create new merge request, change the status to Revise.
-4. Ask the Accepted from Client/other team member.
-5. Test again and move task to Close.
-
-### Daily report
-
-- What tasks did you accomplish to day?
-- Did you encounter any problems, challenges?
-- The plans of working for tomorrow.
-  > [!NOTE]  
-  > Should post to group chat.
-
-### Branch name
-
-- Must check out to another the branch and branch's name should have meaning of the task.
-- In some case, we should put the task ID before the branch names, example `T123-the-branch-name`
-
-### Commit message
-
-- Explain what you are done.
-- Make sure all files added .
-- The messages not the same with other commit.
-- Do not commit to unrelated things.
-
-### Merge request
-
-- Makes sure to provide a clear title that summarizes the changes.
-- Discribes the purpose of the request.
-- Assign to relevants reviewers.
-- Makes sure all requirements are meet.
-- In a team, all the members can reviews each other.
-
-### Communicate convention
-
-#### DM
-
-- When have the personal question.
-- Should limit DM when working in group.
-
-#### Group chat
-
-- Use for discuss or when facing some problems.
-- Priority use group chat that help other members or reivewers can keep track the problems.
-
-### Timesheet
-
-- Uses to track the works and activities in a day.
-- List all the works, activities and the time that used to completed the tasks.
+## prettier
+- What is the use of Prettier?
+- What is the Prettier?
