@@ -4,19 +4,7 @@
   "defaultBase": "master",
   "nxCloudAccessToken": "OGI4ZDMxZGUtYTk4Ni00YWE3LWFhYTQtMWEzNDc1NzI1NGZlfHJlYWQtd3JpdGU=",
   "plugins": [
-    {
-      "projects": {
-        "my-react-app": {
-          "root": "apps/my-react-app",
-          "sourceRoot": "apps/my-react-app/src",
-          "projectType": "application"
-        },
-        "my-react-app-e2e": {
-          "root": "apps/my-react-app-e2e",
-          "projectType": "e2e"
-        }
-      }
-    },
+    
     {
       "plugin": "@nx/webpack/plugin",
       "options": {

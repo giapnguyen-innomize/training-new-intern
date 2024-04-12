@@ -1,7 +1,7 @@
 {
-  "name": "my-nest-app",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/my-nest-app/src",
+  "name": "backend",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/backend/src",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -9,14 +9,14 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "my-nest-app:build"
+        "buildTarget": "backend:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "my-nest-app:build:development"
+          "buildTarget": "backend:build:development"
         },
         "production": {
-          "buildTarget": "my-nest-app:build:production"
+          "buildTarget": "backend:build:production"
         }
       }
     }
