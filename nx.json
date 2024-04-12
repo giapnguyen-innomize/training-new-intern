@@ -19,6 +19,12 @@
       }
     },
     {
+      "plugin": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
+      }
+    },
+    {
       "plugin": "@nx/cypress/plugin",
       "options": {
         "targetName": "e2e",
@@ -50,5 +56,4 @@
         "linter": "eslint"
       }
     }
-  }
-}
+  }}
