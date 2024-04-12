@@ -4,7 +4,7 @@ const { join } = require('path');
 
 module.exports = {
   output: {
-    path: join(__dirname, '../dist/my-react-app'),
+    path: join(__dirname, '../../dist/apps/frontend'),
   },
   devServer: {
     port: 4200,
