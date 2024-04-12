@@ -9,14 +9,14 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "apps/my-nest-app:build"
+        "buildTarget": "my-nest-app:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "apps/my-nest-app:build:development"
+          "buildTarget": "my-nest-app:build:development"
         },
         "production": {
-          "buildTarget": "apps/my-nest-app:build:production"
+          "buildTarget": "my-nest-app:build:production"
         }
       }
     }
