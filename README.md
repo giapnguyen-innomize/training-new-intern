@@ -37,7 +37,6 @@ This project provides information and is a place to store the results of the tra
 3. In Progress
 4. In Review/Revise
 5. Done/Closed
-6. One member should take only one task in progress at a time.
 
 #### Working flow:
 
@@ -47,18 +46,22 @@ This project provides information and is a place to store the results of the tra
 4. Ask the Accepted from Client/other team member.
 5. Test again and move task to Close.
 
+> One member should take only one task in progress at a time.
+
 ### Daily report
 
 - What tasks did you accomplish to day?
 - Did you encounter any problems, challenges?
 - The plans of working for tomorrow.
-  > [!NOTE]  
-  > Should post to group chat.
+
+  > Mirai: Post to group chat.
 
 ### Branch name
 
 - Must check out to another the branch and branch's name should have meaning of the task.
 - In some case, we should put the task ID before the branch names, example `T123-the-branch-name`
+
+> One branch for one task
 
 ### Commit message
 
