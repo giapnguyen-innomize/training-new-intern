@@ -4,6 +4,12 @@ This project provides information and is a place to store the results of the tra
 
 # DAY 2
 
+## Learn how to create branch, merge request and link with issue
+
+Issue: `Use the NX to create new Nestjs app #3`
+
+Branch name: `3-use-the-nx-to-create-new-nestjs-app`
+
 ## NX Workspace
 
 - Benefits of a monorepo
