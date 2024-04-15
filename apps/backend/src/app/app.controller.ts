@@ -1,13 +1,18 @@
-import { Controller, Get } from '@nestjs/common';
-
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 
-@Controller()
+@Controller('data')
 export class AppController {
+  
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getData() {
-    return this.appService.getData();
+  async getData(): Promise<any> {
+      const tableName = 'hotel';
+      return this.appService.getData(tableName);
+  }
+  @Post()
+  async createHotel(@Body() hotelData: any): Promise<void> {
+      await this.appService.addDataToHotelTable(hotelData);
   }
 }
