@@ -1,19 +1,19 @@
 {
-    "TableName": "hotel",
-    "KeySchema": [
-      {
-        "AttributeName": "hotelId",
-        "KeyType": "HASH"
-      }
-    ],
-    "AttributeDefinitions": [
-      {
-        "AttributeName": "hotelId",
-        "AttributeType": "S"
-      }
-    ],
-    "ProvisionedThroughput": {
-      "ReadCapacityUnits": 5,
-      "WriteCapacityUnits": 5
+  "TableName": "hotel",
+  "KeySchema": [
+    {
+      "AttributeName": "hotelId",
+      "KeyType": "HASH"
     }
+  ],
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "hotelId",
+      "AttributeType": "S"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
   }
+}

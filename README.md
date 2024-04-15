@@ -7,10 +7,12 @@ This project provides information and is a place to store the results of the tra
 We will manage a list of hotels, create APIs and store data into DynamoDB and display them on the frontend
 
 Data for each hotel will include:
+
 - Hotel id
 - Name
 
 ## Setup DynamoDB
+
 - Run DynamoDB local as Docker image
   - install docker
   - create new file `docker-compose.yml` under apps/backend
@@ -18,6 +20,7 @@ Data for each hotel will include:
 - Create new file `table-script.json`
 
 ## Connect NestJS application with DynamoDB
+
 - setup `aws configure`
 - create list APIs to Read, Create, Update, Delete hotel
 
