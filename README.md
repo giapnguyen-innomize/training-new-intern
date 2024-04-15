@@ -20,3 +20,5 @@ Data for each hotel will include:
 ## Connect NestJS application with DynamoDB
 - setup `aws configure`
 - create list APIs to Read, Create, Update, Delete hotel
+
+## Frontend implement the API and show list hotel
