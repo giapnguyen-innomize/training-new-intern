@@ -23,5 +23,21 @@ Data for each hotel will include:
 
 - setup `aws configure`
 - create list APIs to Read, Create, Update, Delete hotel
-
+  - **Read**: 
+    - Method: GET
+    - URL: `http://localhost:3000/api/hotel` 
+  - **Create**:
+    - Method: POST  
+    - URL:`http://localhost:3000/api/hotel`
+    - Input: In Body enter `name` and `hotelId`
+  - **Update**:
+    - Method: PATCH
+    - URL: `http://localhost:3000/api/hotel/:hotelId/:name`
+  - **Delete**
+    - Delete hotel attribute
+      - Method: DELETE
+      - URL: `http://localhost:3000/api/hotel/:hotelId/:name`
+    - Delete hotel item
+      - Method: DELETE
+      - URL: `http://localhost:3000/api/:hotelId/:name`
 ## Frontend implement the API and show list hotel
