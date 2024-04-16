@@ -1,14 +1,21 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { useEffect } from 'react';
 import styles from './app.module.css';
-
-import NxWelcome from './nx-welcome';
 
 import { Route, Routes, Link } from 'react-router-dom';
 
+
+
+
 export function App() {
+
+  useEffect(() => {
+    fetch('http://localhost:3000/api/hotel').then((a) => console.log(a))
+  }, [])
+
+
   return (
     <div>
-      <NxWelcome title="frontend" />
 
       {/* START: routes */}
       {/* These routes and navigation have been generated for you */}

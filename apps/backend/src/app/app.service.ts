@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { dynamoDBClient } from '../awsConfig/dynamoDBClient';
 import { DynamoDB } from 'aws-sdk';
+
+
+
 @Injectable()
 export class AppService {
   dynamoDBClient: any;
@@ -12,7 +15,7 @@ export class AppService {
           TableName: tableName,
         })
         .promise();
-      return { HotelData: results.Items };
+      return results.Items ;
     } catch (error) {
       console.error('Error retrieving data from DynamoDB:', error);
       throw error;
@@ -25,7 +28,7 @@ export class AppService {
       Item: hotelData,
     };
     try {
-      await dynamoDBClient().put(params).promise();
+     const createdHotel= await dynamoDBClient().put(params).promise();
       console.log(`Create hotel data successful!`);
     } catch (error) {
       console.error('Error adding hotel data:', error);
