@@ -67,5 +67,11 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
     "tslib": "^2.3.0"
+  },
+  "optionalDependencies": {
+    "@nx/nx-darwin-arm64": "18.2.4",
+    "@nx/nx-darwin-x64": "18.2.4",
+    "@nx/nx-linux-x64-gnu": "18.2.4",
+    "@nx/nx-win32-x64-msvc": "18.2.4"
   }
 }

@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-      - run: npm ci
+      - run: npm ci --include=optional
       - uses: nrwl/nx-set-shas@v4
 
       - run: git branch --track main origin/main
