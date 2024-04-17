@@ -54,7 +54,6 @@ export class HotelController {
     @Param('hotelId') hotelId: string,
     @Param('name') hotelName: string
   ): Promise<ApiResponse<any>> {
-    // console.log(hotelId, hotelName)
     const deleted = await this.hotelService.deleteHotelItem(hotelId, hotelName);
     return {
       message: `Hotel  item delete successfully`,
