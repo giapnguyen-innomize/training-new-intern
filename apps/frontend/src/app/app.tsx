@@ -7,13 +7,15 @@ export function App() {
     name: '',
     hotelId: '',
     descript: '',
+    image: '',
   };
   const [data, setData] = useState<any[]>([]);
-  const [open, setOpen] = useState<boolean>(false);
+  const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [reload, setReload] = useState<boolean>(false);
   const [openUpdate, setOpenUpdate] = useState<boolean>(false);
   const [formData, setFormData] = useState(initialState);
   const [dataUpdate, setDataUpdate] = useState(initialState);
+  const [uploadImg,setUploadImg]=useState<{}|undefined>(undefined)
 
   useEffect(() => {
     const fetchApi = async () => {
@@ -43,7 +45,7 @@ export function App() {
       })
       .catch((err) => console.log(err));
     setFormData(initialState);
-    setOpen(false);
+    setOpenCreate(false);
   };
 
   const handleUpdate = async (e: any) => {
@@ -72,7 +74,9 @@ export function App() {
         .catch((err) => console.log(err));
     } else return;
   };
-
+  const handleUploadImg =async (e:any)=>{
+    console.log('upload')
+  }
   if (!data) {
     return;
   }
@@ -88,11 +92,11 @@ export function App() {
           cursor: 'pointer',
           borderRadius: '5px',
         }}
-        onClick={() => setOpen((pre) => !pre)}
+        onClick={() => setOpenCreate((pre) => !pre)}
       >
         Add new hotel
       </button>
-      {open === true ? (
+      {openCreate === true ? (
         <form onSubmit={handleCreate}>
           <div style={{ display: 'block', padding: '10px' }}>
             <div>
@@ -109,7 +113,12 @@ export function App() {
                 name="hotelId"
                 value={formData.hotelId}
                 onChange={handleInputCreate}
-              />
+              /><br/>Hotel's Image:
+              <input
+                type="file"
+                name="image"
+                onChange={handleUploadImg}
+            />
             </div>
             <textarea
               name="descript"
@@ -158,6 +167,7 @@ export function App() {
             <th>Hotel Id</th>
             <th>Hotel Name</th>
             <th>Description</th>
+            <th>Images</th>
             <th>Update</th>
             <th>Delete</th>
           </tr>
@@ -168,6 +178,7 @@ export function App() {
               <td>{item.hotelId}</td>
               <td>{item.name}</td>
               <td>{item.descript}</td>
+              <td>{item.image}</td>
               <td>
                 <button
                   onClick={() => {
