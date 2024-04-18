@@ -3,8 +3,8 @@ import { DynamoDB } from 'aws-sdk';
 import * as AWS from 'aws-sdk';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import 'dotenv/config';
-require('aws-sdk/lib/maintenance_mode_message').suppress = true;
-
+import config from 'aws-sdk/lib/maintenance_mode_message'
+config.suppress = true;
 @Injectable()
 
 export class HotelService {
