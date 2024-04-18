@@ -29,7 +29,6 @@ export class HotelController {
   // Create new hotel items
   @Post('hotel')
   async createHotel(@Body() hotelData: Hotel<{}>): Promise<ApiResponse<{}>> {
-    console.log({ hotelData });
     const created = await this.hotelService.addHotelData(hotelData);
     return { message: 'Hotel item created successfully', data: created };
   }
@@ -40,7 +39,6 @@ export class HotelController {
     @Param('name') name: string,
     @Body() dataUpdate: any
   ): Promise<ApiResponse<any>> {
-    console.log({ dataUpdate });
     const updated = await this.hotelService.updateHotelItem(
       hotelId,
       name,

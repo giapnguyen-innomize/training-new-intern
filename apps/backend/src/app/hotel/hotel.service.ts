@@ -1,14 +1,23 @@
 import { Injectable } from '@nestjs/common';
-import { dynamoDBClient } from '../../awsConfig/dynamoDBClient';
 import { DynamoDB } from 'aws-sdk';
+import * as AWS from 'aws-sdk';
+import { DocumentClient } from 'aws-sdk/clients/dynamodb';
+import 'dotenv/config';
+require('aws-sdk/lib/maintenance_mode_message').suppress = true;
 
 @Injectable()
+
 export class HotelService {
-  dynamoDBClient: any;
+   dynamoDBClient = (): DocumentClient => {
+    return new AWS.DynamoDB.DocumentClient({
+      region: process.env.AWS_DEFAULT_REGION,
+      endpoint: process.env.ENDPOINT_URL,
+    });
+  };
   // Get hotel table data
   async getData(tableName: string): Promise<any> {
     try {
-      const results = await dynamoDBClient()
+      const results = await this.dynamoDBClient()
         .scan({
           TableName: tableName,
         })
@@ -26,7 +35,7 @@ export class HotelService {
       Item: hotelData,
     };
     try {
-      const createdHotel = await dynamoDBClient().put(params).promise();
+      const createdHotel = await this.dynamoDBClient().put(params).promise();
       return hotelData;
     } catch (error) {
       console.error('Error adding hotel data:', error);
@@ -48,7 +57,7 @@ export class HotelService {
       },
     };
     try {
-      await dynamoDBClient().put(params).promise();
+      await this.dynamoDBClient().put(params).promise();
       return dataUpdate;
     } catch (error) {
       console.error(`Error updating hotel item with ID ${hotelId}:`, error);
@@ -65,9 +74,8 @@ export class HotelService {
         name: hotelName,
       },
     };
-    console.log(params);
     try {
-      await dynamoDBClient().delete(params).promise();
+      await this.dynamoDBClient().delete(params).promise();
       return { hotelId, hotelName };
     } catch (error) {
       console.error(`Error deleting hotel item with ID ${hotelId}:`, error);
