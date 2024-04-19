@@ -31,7 +31,10 @@ Data for each hotel will include:
 - **Read**:
   - Method: GET
   - URL: `http://localhost:3000/api/hotel`
+
   - ![alt text](../training-new-intern/apps/docs/image-1.png)
+
+
 - **Create**:
   - Method: POST
   - URL:`http://localhost:3000/api/hotel`
@@ -45,3 +48,4 @@ Data for each hotel will include:
   - Method: DELETE
   - URL: `http://localhost:3000/api/:hotelId/:name`
   - ![alt text](../training-new-intern/apps/docs/image-3.png)
+
