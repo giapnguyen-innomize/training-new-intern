@@ -11,15 +11,36 @@ export class CloudinaryService {
       api_secret: this.configService.get<string>('cloudinary.apiSecret'),
     });
   }
-  async uploadImage(image: any) {
-    cloudinary.uploader.upload(
-        image.tempFilePath,
-        { folder: "HotelImages" },
-        (err, result) => {
-          if (err) throw err
-          return { public_id: result.public_id, url: result.url }
-        }
-      );
-  ;
+  async uploadImage(
+    image: any
+  ): Promise<{ secureUrl: string; publicId: string }> {
+    return new Promise<{ secureUrl: string; publicId: string }>(
+      (resolve, reject) => {
+        cloudinary.uploader
+          .upload_stream(
+            { resource_type: 'auto', folder: 'HotelImages' },
+            (error, result) => {
+              if (error) {
+                reject('Error uploading image to Cloudinary: ' + error.message);
+              } else {
+                resolve({
+                  secureUrl: result.secure_url,
+                  publicId: result.public_id,
+                });
+              }
+            }
+          )
+          .end(image.buffer);
+      }
+    );
+  }
+  async deleteImage(publicId: string): Promise<any> {
+    try {
+      await cloudinary.uploader.destroy(publicId, function (error, result) {
+        console.log(result, error);
+      });
+    } catch (error) {
+      throw new Error('Error deleting image from Cloudinary: ' + error.message);
+    }
   }
 }

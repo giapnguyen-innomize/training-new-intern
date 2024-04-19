@@ -16,7 +16,7 @@ interface Hotel {
   name: string;
   hotelId: string;
   descript: string;
-  image:object
+  image?: { secureUrl: string; publicId: string };
 }
 interface ApiResponse {
   message: string;
@@ -24,20 +24,22 @@ interface ApiResponse {
 }
 @Controller()
 export class HotelController {
-  constructor(private readonly hotelService: HotelService,private readonly cloudinaryService: CloudinaryService) {}
+  constructor(
+    private readonly hotelService: HotelService,
+    private readonly cloudinaryService: CloudinaryService
+  ) {}
   //Get all hotel table infor
   @Get('hotel')
-  async getAll(): Promise<object> {
+  async getAll(): Promise<Hotel> {
     const tableName = 'hotel';
     return this.hotelService.getData(tableName);
   }
   // Create new hotel items
   @Post('hotel')
   async createHotel(@Body() hotelData: any): Promise<ApiResponse> {
-    const created={"test":"a"}
-    console.log({hotelData})
-    // const created = await this.hotelService.addHotelData(hotelData);
-    return { message: 'Hotel item created successfully', data:created };//, data: created
+    console.log({ hotelData: hotelData });
+    const created = await this.hotelService.addHotelData(hotelData);
+    return { message: 'Hotel item created successfully', data: created }; //, data: created
   }
   //Update hotel
   @Put(':hotelId/:name')
@@ -57,12 +59,22 @@ export class HotelController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('image'))
   async uploadFile(@UploadedFile() image) {
-    console.log({imageUrl: await this.cloudinaryService.uploadImage(image) })
-      return { imageUrl: await this.cloudinaryService.uploadImage(image) };
+    const imageUrl = await this.cloudinaryService.uploadImage(image);
+    return { imageUrl };
+  }
+  //Delete Image
+  @Post('delete/hotel')
+  async deleteImage(@Body() publicId: string): Promise<ApiResponse> {
+    try {
+      const publicId1 = Object.keys(publicId);
+      await this.cloudinaryService.deleteImage(publicId1.toString());
+      // await this.hotelService.updateHotelItem(dataUpdate.hotelId,dataUpdate.name, dataUpdate);
+      return { message: 'Image deleted successfully', data: publicId1 };
+    } catch (error) {
+      throw new Error('Error deleting image: ' + error.message);
     }
+  }
 
-  
-  
   // Delete hotel item
   @Delete(':hotelId/:name')
   async deleteHotel(
@@ -72,7 +84,7 @@ export class HotelController {
     const deleted = await this.hotelService.deleteHotelItem(hotelId, hotelName);
     return {
       message: `Hotel  item delete successfully`,
-      data:{id:`${deleted.hotelId}`,name:`${deleted.hotelName}`}
+      data: { id: `${deleted.hotelId}`, name: `${deleted.hotelName}` },
     };
   }
 }

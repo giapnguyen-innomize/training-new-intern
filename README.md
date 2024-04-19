@@ -31,17 +31,17 @@ Data for each hotel will include:
 - **Read**:
   - Method: GET
   - URL: `http://localhost:3000/api/hotel`
-  - ![alt text](image-1.png)
+  - ![alt text](../training-new-intern/apps/docs/image-1.png)
 - **Create**:
   - Method: POST
   - URL:`http://localhost:3000/api/hotel`
   - Input: In Body enter `name` and `hotelId` and `description`
-  - ![alt text](image.png)
+  - ![alt text](../training-new-intern/apps/docs/image.png)
 - **Update**:
   - Method: PUT
   - URL: `http://localhost:3000/api/hotel/:hotelId/:name`
-  - ![alt text](image-2.png)
+  - ![alt text](../training-new-intern/apps/docs/image-2.png)
 - **Delete**
   - Method: DELETE
   - URL: `http://localhost:3000/api/:hotelId/:name`
-  - ![alt text](image-3.png)
+  - ![alt text](../training-new-intern/apps/docs/image-3.png)
