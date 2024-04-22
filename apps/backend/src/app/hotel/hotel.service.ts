@@ -3,13 +3,11 @@ import { DynamoDB } from 'aws-sdk';
 import * as AWS from 'aws-sdk';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import 'dotenv/config';
-import config from 'aws-sdk/lib/maintenance_mode_message'
-import { S3 } from 'aws-sdk';
+import config from 'aws-sdk/lib/maintenance_mode_message';
 config.suppress = true;
 @Injectable()
-
 export class HotelService {
-   dynamoDBClient = (): DocumentClient => {
+  dynamoDBClient = (): DocumentClient => {
     return new AWS.DynamoDB.DocumentClient({
       region: process.env.AWS_DEFAULT_REGION,
       endpoint: process.env.ENDPOINT_URL,
@@ -65,9 +63,6 @@ export class HotelService {
       throw error;
     }
   }
-  //Update image
-
-
   //Delete item
   async deleteHotelItem(hotelId: string, hotelName: string): Promise<any> {
     const params: DynamoDB.DocumentClient.DeleteItemInput = {

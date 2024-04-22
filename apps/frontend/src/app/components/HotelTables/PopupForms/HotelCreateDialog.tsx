@@ -18,42 +18,43 @@ export const HotelCreateDialog = ({
     name: '',
     hotelId: '',
     descript: '',
-    image: '',
+    image: {},
   };
-  const [image,setImage]=useState('')
+  const [image, setImage] = useState(Object);
   const handleInputCreate = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
-
   const handleCreate = async (e: any) => {
     e.preventDefault();
+    formData = { ...formData, image };
     await axios
-      .post('http://localhost:3000/api/hotel',formData)
+      .post('http://localhost:3000/api/hotel', formData)
       .then((data) => {
-        console.log(data), setReload(!reload);
+        console.log(data);
       })
       .catch((err) => console.log(err));
     setFormData(initialState);
     setOpenCreate(false);
+    setReload(!reload);
   };
   const handleChangeImg = async (e: any) => {
-    const img= e.target.files[0];
-    setImage(img)
+    const img = e.target.files[0];
+    setImage(img);
     const imgForm = new FormData();
-    imgForm.append('image',img);
+    imgForm.append('image', img);
     try {
-        const response = await axios.post('http://localhost:3000/api/upload', imgForm, {
+      const response = await axios.post(
+        'http://localhost:3000/api/upload',
+        imgForm,
+        {
           headers: { 'Content-Type': 'multipart/form-data' },
-        });
-        console.log('Image uploaded:', response.data.imageUrl);
-      } catch (error) {
-        console.error('Error uploading image:', error);
-      }
-
-  };
-  const handleUpload = async () => {
+        }
+      );
+      setImage(response.data.imageUrl);
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
   };
   return (
     <div
@@ -76,7 +77,7 @@ export const HotelCreateDialog = ({
           padding: '50px',
           border: '1px solid #888',
           width: '80%',
-          display:"ruby-text",
+          display: 'ruby-text',
           maxWidth: '800px',
         }}
       >
@@ -98,10 +99,10 @@ export const HotelCreateDialog = ({
           <form onSubmit={handleCreate}>
             <div style={{ display: 'block', padding: '10px' }}>
               <div>
-                <div style={{paddingBottom:"10px"}}>
+                <div style={{ paddingBottom: '10px' }}>
                   Name:
                   <input
-                    style={{ display: 'block'}}
+                    style={{ display: 'block' }}
                     type="text"
                     placeholder="Hotel Name"
                     name="name"
@@ -121,20 +122,21 @@ export const HotelCreateDialog = ({
                   />
                 </div>
                 <br />
-                Hotel's Image: <br/>
+                Hotel's Image: <br />
+                <img src={image && image.secureUrl} />
                 <input type="file" name="image" onChange={handleChangeImg} />
-                <div style={{paddingTop:"10px"}}>
-                Description:<br/>
-                <textarea
-                  name="descript"
-                  placeholder="Description..."
-                  value={formData.descript}
-                  onChange={handleInputCreate}
-                  cols={45}
-                ></textarea>
+                <div style={{ paddingTop: '10px' }}>
+                  Description:
+                  <br />
+                  <textarea
+                    name="descript"
+                    placeholder="Description..."
+                    value={formData.descript}
+                    onChange={handleInputCreate}
+                    cols={45}
+                  ></textarea>
+                </div>
               </div>
-              </div>
-              
             </div>
             <div
               style={{
