@@ -63,13 +63,11 @@ export class HotelController {
     return { imageUrl };
   }
   //Delete Image
-  @Post('delete/hotel')
+  @Post('delete/image')
   async deleteImage(@Body() publicId: string): Promise<ApiResponse> {
     try {
-      const publicId1 = Object.keys(publicId);
-      await this.cloudinaryService.deleteImage(publicId1.toString());
-      // await this.hotelService.updateHotelItem(dataUpdate.hotelId,dataUpdate.name, dataUpdate);
-      return { message: 'Image deleted successfully', data: publicId1 };
+      await this.cloudinaryService.deleteImage(publicId);
+  return { message: 'Image deleted successfully', data: {publicId} };
     } catch (error) {
       throw new Error('Error deleting image: ' + error.message);
     }

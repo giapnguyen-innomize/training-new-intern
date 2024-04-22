@@ -45,27 +45,30 @@ export function App() {
   };
   const handleDeleteImage = async (publicId: string, item: any) => {
     const { image, ...dataUpdate } = item;
+    console.log(publicId)
     if (window.confirm(`Do you want to delete this image?`)) {
+      try {
+        const response = await axios.post(
+          'http://localhost:3000/api/delete/image',
+          {publicId}
+          
+        );
+        await axios
+          .put(
+            `http://localhost:3000/api/${dataUpdate.hotelId}/${dataUpdate.name}`,
+            dataUpdate
+          )
+          .then((data) => {
+            console.log(data), setReload(!reload);
+          })
+          .catch((err) => console.log(err));
+        setReload(!reload);
+        return response.data.message;
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
     }
-    try {
-      const response = await axios.post(
-        'http://localhost:3000/api/delete/hotel',
-        publicId
-      );
-      await axios
-        .put(
-          `http://localhost:3000/api/${dataUpdate.hotelId}/${dataUpdate.name}`,
-          dataUpdate
-        )
-        .then((data) => {
-          console.log(data), setReload(!reload);
-        })
-        .catch((err) => console.log(err));
-      setReload(!reload);
-      return response.data.message;
-    } catch (error) {
-      console.error('Error uploading image:', error);
-    }
+  
   };
   const handleInputCreate = (e: any) => {
     const { name, value } = e.target;
