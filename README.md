@@ -31,7 +31,7 @@ Data for each hotel will include:
 - **Read**:
   - Method: GET
   - URL: `http://localhost:3000/api/hotel`
-  - ![alt text](./apps/docs/image-1.png)
+   - ![alt text](./apps/docs/image-1.png)
 - **Create**:
   - Method: POST
   - URL:`http://localhost:3000/api/hotel`
