@@ -12,11 +12,13 @@ import {
 import { HotelService } from './hotel.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
+
+
 interface Hotel {
   name: string;
   hotelId: string;
-  descript: string;
-  image: { secureUrl: string; publicId: string };
+  descript?: string;
+  image?: { secureUrl: string; publicId: string };
 }
 interface ApiResponse {
   message: string;
@@ -36,8 +38,7 @@ export class HotelController {
   }
   // Create new hotel items
   @Post('hotel')
-  async createHotel(@Body() hotelData: any): Promise<ApiResponse> {
-    console.log({ hotelData: hotelData });
+  async createHotel(@Body() hotelData: Hotel): Promise<ApiResponse> {
     const created = await this.hotelService.addHotelData(hotelData);
     return { message: 'Hotel item created successfully', data: created }; //, data: created
   }

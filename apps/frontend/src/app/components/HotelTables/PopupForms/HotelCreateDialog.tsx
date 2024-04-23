@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
+
+
 interface HotelCreate {
   formData: any;
   setFormData: any;
@@ -31,12 +33,12 @@ export const HotelCreateDialog = ({
     await axios
       .post('http://localhost:3000/api/hotel', formData)
       .then((data) => {
-        console.log(data);
+        setReload(!reload);
       })
       .catch((err) => console.log(err));
     setFormData(initialState);
     setOpenCreate(false);
-    setReload(!reload);
+   
   };
   const handleChangeImg = async (e: any) => {
     const img = e.target.files[0];

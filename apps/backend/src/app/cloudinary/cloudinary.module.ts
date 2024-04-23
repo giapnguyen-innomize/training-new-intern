@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
 import { CloudinaryService } from './cloudinary.service';
 import { HotelController } from '../hotel/hotel.controller';
+import { ConfigModule } from '@nestjs/config';
+import cloudinaryConfig from './cloudinary.config';
 
-@Module({})
-export class CloudinaryModule {
-  controllers: [HotelController];
-  providers: [CloudinaryService];
-}
+@Module({ 
+    imports:[ConfigModule.forRoot({ load: [cloudinaryConfig] })],
+    controllers: [HotelController],
+    providers: [CloudinaryService] })
+export class CloudinaryModule {}
