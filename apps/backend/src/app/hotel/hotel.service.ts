@@ -52,7 +52,7 @@ export class HotelService {
       TableName: 'hotel',
       Item: {
         hotelId: dataUpdate.hotelId,
-        name: dataUpdate.name,
+        name: name,
         ...dataUpdate,
       },
     };

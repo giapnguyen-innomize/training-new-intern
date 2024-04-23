@@ -12,18 +12,6 @@ import {
 import { HotelService } from './hotel.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
-
-
-interface Hotel {
-  name: string;
-  hotelId: string;
-  descript?: string;
-  image?: { secureUrl: string; publicId: string };
-}
-interface ApiResponse {
-  message: string;
-  data: object;
-}
 @Controller()
 export class HotelController {
   constructor(
@@ -65,13 +53,10 @@ export class HotelController {
   }
   //Delete Image
   @Post('delete/image')
-  async deleteImage(@Body() publicId: object): Promise<ApiResponse> {
+  async deleteImage(@Body() publicId: string): Promise<ApiResponse> {
     try {
-      await this.cloudinaryService.deleteImage(
-        Object.values(publicId).toString()
-      );
+      await this.cloudinaryService.deleteImage(publicId);
       return { message: 'Image deleted successfully', data: { publicId } };
-
     } catch (error) {
       throw new Error('Error deleting image: ' + error.message);
     }

@@ -6,13 +6,17 @@ import React, {
   ReactNode,
   useEffect,
 } from 'react';
+
+interface Image {
+  secureUrl: string;
+  publicId: string;
+}
 interface HotelInfo {
   name: string;
   hotelId: string;
   descript: string;
-  image: { secureUrl: string; publicId: string };
+  image: Image;
 }
-
 interface HotelContextType {
   hotelInfoList: HotelInfo[];
   setHotelInfoList: (info: HotelInfo[]) => void;
@@ -21,6 +25,12 @@ interface HotelContextType {
 }
 
 const HotelContext = createContext<HotelContextType | undefined>(undefined);
+export const initialState = {
+  name: '',
+  hotelId: '',
+  descript: '',
+  image: {},
+};
 
 export const HotelProvider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -34,7 +44,7 @@ export const HotelProvider: React.FC<{ children: ReactNode }> = ({
         .then(({ data }: { data: HotelInfo[] }) => {
           setHotelInfoList(data);
         })
-        .catch((err) => console.log(err));
+        .catch((error) => console.error);
     };
     fetchApi();
   }, [reload]);

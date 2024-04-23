@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-
+import { initialState } from '../../../context/HotelProvider';
 
 interface HotelCreate {
   formData: any;
@@ -9,6 +9,7 @@ interface HotelCreate {
   setReload: any;
   setOpenCreate: any;
 }
+
 export const HotelCreateDialog = ({
   formData,
   setFormData,
@@ -16,12 +17,6 @@ export const HotelCreateDialog = ({
   setReload,
   setOpenCreate,
 }: HotelCreate) => {
-  const initialState = {
-    name: '',
-    hotelId: '',
-    descript: '',
-    image: {},
-  };
   const [image, setImage] = useState(Object);
   const handleInputCreate = (e: any) => {
     const { name, value } = e.target;
@@ -38,7 +33,6 @@ export const HotelCreateDialog = ({
       .catch((err) => console.log(err));
     setFormData(initialState);
     setOpenCreate(false);
-   
   };
   const handleChangeImg = async (e: any) => {
     const img = e.target.files[0];
