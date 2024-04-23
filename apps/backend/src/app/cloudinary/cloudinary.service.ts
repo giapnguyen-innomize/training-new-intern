@@ -19,6 +19,7 @@ export class CloudinaryService {
     image: any
   ): Promise<Image> {
     return new Promise<Image>(
+
       (resolve, reject) => {
         cloudinary.uploader
           .upload_stream(
@@ -44,6 +45,7 @@ export class CloudinaryService {
         console.log(result, error);
       });
       return { 'delete image success': `${publicId}` };
+
     } catch (error) {
       throw new Error('Error deleting image from Cloudinary: ' + error.message);
     }

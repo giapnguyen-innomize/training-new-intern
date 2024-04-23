@@ -71,6 +71,7 @@ export class HotelController {
         Object.values(publicId).toString()
       );
       return { message: 'Image deleted successfully', data: { publicId } };
+
     } catch (error) {
       throw new Error('Error deleting image: ' + error.message);
     }
