@@ -1,15 +1,16 @@
+interface Image {
+  secureUrl: string;
+  publicId: string;
+}
 interface Hotel {
   name: string;
   hotelId: string;
   descript?: string;
-  image?: { secureUrl: string; publicId: string };
+  image?: Image
 }
 interface ApiResponse {
   message: string;
   data: object;
 }
 
-interface Image {
-  secureUrl: string;
-  publicId: string;
-}
+

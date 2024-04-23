@@ -20,9 +20,10 @@ export class HotelController {
   ) {}
   //Get all hotel table infor
   @Get('hotel')
-  async getAll(): Promise<Hotel> {
+  async getAll(): Promise<ApiResponse> {
     const tableName = 'hotel';
-    return this.hotelService.getData(tableName);
+    const response= await this.hotelService.getData(tableName);
+    return {message:'get hotel data success!', data:{response}}
   }
   // Create new hotel items
   @Post('hotel')
@@ -35,7 +36,7 @@ export class HotelController {
   async updateHotel(
     @Param('hotelId') hotelId: string,
     @Param('name') name: string,
-    @Body() dataUpdate: any
+    @Body() dataUpdate: Hotel
   ): Promise<ApiResponse> {
     const updated = await this.hotelService.updateHotelItem(
       hotelId,
@@ -70,7 +71,7 @@ export class HotelController {
     const deleted = await this.hotelService.deleteHotelItem(hotelId, hotelName);
     return {
       message: `Hotel  item delete successfully`,
-      data: { id: `${deleted.hotelId}`, name: `${deleted.hotelName}` },
+      data: { message:deleted.message , data:deleted.data  },
     };
   }
 }
