@@ -80,6 +80,7 @@ export function HotelTable() {
             reload={reload}
             setReload={setReload}
             setOpenCreate={setOpenCreate}
+            
           />
         )}
       </div>

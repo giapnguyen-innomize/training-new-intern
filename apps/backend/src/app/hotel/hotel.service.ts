@@ -27,6 +27,7 @@ export class HotelService {
       throw error;
     }
   }
+  // Check hotelId in unique
   // Create new hotel item
   async addHotelData(hotelData: any): Promise<any> {
     const params: DynamoDB.DocumentClient.PutItemInput = {

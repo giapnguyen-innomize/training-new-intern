@@ -12,6 +12,7 @@ import {
 import { HotelService } from './hotel.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
+import { createHotelSchema } from '../validate/validateCreateHotelForm';
 interface Hotel {
   name: string;
   hotelId: string;
@@ -37,9 +38,13 @@ export class HotelController {
   // Create new hotel items
   @Post('hotel')
   async createHotel(@Body() hotelData: any): Promise<ApiResponse> {
-    console.log({ hotelData: hotelData });
-    const created = await this.hotelService.addHotelData(hotelData);
-    return { message: 'Hotel item created successfully', data: created }; //, data: created
+    const { error, value }=createHotelSchema.validate(hotelData)
+    if (error) {
+      return  { message:error.details[0].message, data:{type:'error'}}
+    }else{
+      const created = await this.hotelService.addHotelData(hotelData);
+      return { message: 'Hotel item created successfully', data: created };
+    }
   }
   //Update hotel
   @Put(':hotelId/:name')
@@ -71,7 +76,7 @@ export class HotelController {
       );
       return { message: 'Image deleted successfully', data: { publicId } };
     } catch (error) {
-      throw new Error('Error deleting image: ' + error.message);
+      throw new Error('Error deleting image: ' + error.message)
     }
   }
   // Delete hotel item

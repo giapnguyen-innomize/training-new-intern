@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useHotelContext } from '../../../reactContext/HotelProvider';
 interface HotelCreate {
   formData: any;
   setFormData: any;
@@ -21,9 +23,23 @@ export const HotelCreateDialog = ({
     image: {},
   };
   const [image, setImage] = useState(Object);
+  const { hotelInfoList } = useHotelContext();
+  console.log(hotelInfoList);
+  const CheckId = () => {
+    const check = hotelInfoList.map((item) => {
+      if (item.hotelId === formData.hotelId) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  return check[0]
+  };
+  console.log(CheckId())
   const handleInputCreate = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    CheckId();
   };
   const handleCreate = async (e: any) => {
     e.preventDefault();
@@ -31,9 +47,12 @@ export const HotelCreateDialog = ({
     await axios
       .post('http://localhost:3000/api/hotel', formData)
       .then((data) => {
-        console.log(data);
+        data.data.data.type == 'error'
+          ? toast.error(data.data.message)
+          : toast.success(data.data.message);
       })
       .catch((err) => console.log(err));
+
     setFormData(initialState);
     setOpenCreate(false);
     setReload(!reload);
@@ -102,6 +121,7 @@ export const HotelCreateDialog = ({
                 <div style={{ paddingBottom: '10px' }}>
                   Name:
                   <input
+                    required
                     style={{ display: 'block' }}
                     type="text"
                     placeholder="Hotel Name"
@@ -113,13 +133,14 @@ export const HotelCreateDialog = ({
                 <div>
                   Hotel ID:
                   <input
+                    required
                     style={{ display: 'block' }}
                     type="text"
                     placeholder="Hotel Id"
                     name="hotelId"
                     value={formData.hotelId}
                     onChange={handleInputCreate}
-                  />
+                  />{CheckId()&&<span style={{color:'red'}}>The hotel id must be unique !</span>}
                 </div>
                 <br />
                 Hotel's Image: <br />
@@ -146,11 +167,11 @@ export const HotelCreateDialog = ({
                 justifyContent: 'center',
                 paddingTop: '20px',
               }}
-            >
+            > 
               <button
                 type="submit"
                 style={{
-                  backgroundColor: '#4CAF50',
+                  backgroundColor: CheckId()?'grey':'#4CAF50',
                   color: 'white',
                   padding: '10px 20px',
                   border: 'none',
@@ -158,6 +179,7 @@ export const HotelCreateDialog = ({
                   borderRadius: '5px',
                   marginLeft: '10px',
                 }}
+                disabled={CheckId()}
               >
                 Create
               </button>
