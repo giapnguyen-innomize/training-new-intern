@@ -11,7 +11,6 @@ interface HotelCreate {
   setReload: any;
   setOpenCreate: any;
 }
-
 export const HotelCreateDialog = ({
   formData,
   setFormData,
@@ -20,21 +19,9 @@ export const HotelCreateDialog = ({
   setOpenCreate,
 }: HotelCreate) => {
   const [image, setImage] = useState(Object);
-  const { hotelInfoList } = useHotelContext();
-  const checkId = () => {
-    const check = hotelInfoList.map((item) => {
-      if (item.hotelId === formData.hotelId) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-    return check[0];
-  };
   const handleInputCreate = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    checkId();
   };
   const handleCreate = async (e: any) => {
     e.preventDefault();
@@ -103,11 +90,6 @@ export const HotelCreateDialog = ({
                     value={formData.hotelId}
                     onChange={handleInputCreate}
                   />
-                  {checkId() && (
-                    <span style={{ color: 'red' }}>
-                      The hotel id must be unique !
-                    </span>
-                  )}
                 </div>
                 <br />
                 Hotel's Image: <br />
@@ -129,10 +111,7 @@ export const HotelCreateDialog = ({
             <div style={{ alignItems: 'center', textAlign: 'center' }}>
               <button
                 type="submit"
-                className={`${styles.create_btn} ${
-                  checkId() && styles.disable_btn
-                }`}
-                disabled={checkId()}
+                className={`${styles.create_btn}`}
               >
                 Create
               </button>

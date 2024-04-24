@@ -29,22 +29,23 @@ export class HotelService {
     }
   }
   // Create new hotel item
-  async addHotelData(hotelData: Hotel): Promise<Hotel> {
+  async addHotelData(hotelData: Hotel): Promise<ApiResponse> {
+    const { hotelId, name, descript, image } = hotelData;
     const params: DynamoDB.DocumentClient.PutItemInput = {
       TableName: 'hotel',
-      Item: {
-        hotelId: { S: 'unique-hotel-id' },
-        name: { S: 'hotel-name' },
-        ...hotelData,
-      },
-      ConditionExpression: 'attribute_not_exists(hotelId)',
+        Item: {
+           hotelId: hotelId,
+            name: name,
+            description: descript,
+            image: image,
+        },
+        ConditionExpression: 'attribute_not_exists(hotelId)',
     };
     try {
       await this.dynamoDBClient().put(params).promise();
-      return hotelData;
+      return {message:'Create a hotel success', data:hotelData};
     } catch (error) {
-      console.error('Error adding hotel data:', error);
-      throw error;
+      console.error(error)
     }
   }
   //update hotel item
