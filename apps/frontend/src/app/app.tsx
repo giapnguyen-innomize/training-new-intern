@@ -8,5 +8,4 @@ export function App() {
       <ToastContainer />
     </>
   );
-
 }

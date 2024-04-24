@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useHotelContext } from '../../../context/HotelProvider';
 import { initialState } from '../../../context/HotelProvider';
+
 interface HotelCreate {
   formData: any;
   setFormData: any;
@@ -29,9 +30,9 @@ export const HotelCreateDialog = ({
         return false;
       }
     });
-  return check[0]
+    return check[0];
   };
-  console.log(CheckId())
+  console.log(CheckId());
   const handleInputCreate = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -43,9 +44,9 @@ export const HotelCreateDialog = ({
     await axios
       .post('http://localhost:3000/api/hotel', formData)
       .then((data) => {
-        data.data.data.type == 'error'
-        ? toast.error(data.data.message)
-        : toast.success(data.data.message);
+        data.data.data.type === 'error'
+          ? toast.error(data.data.message)
+          : toast.success(data.data.message);
         setReload(!reload);
       })
       .catch((err) => console.error);
@@ -135,7 +136,12 @@ export const HotelCreateDialog = ({
                     name="hotelId"
                     value={formData.hotelId}
                     onChange={handleInputCreate}
-                  />{CheckId()&&<span style={{color:'red'}}>The hotel id must be unique !</span>}
+                  />
+                  {CheckId() && (
+                    <span style={{ color: 'red' }}>
+                      The hotel id must be unique !
+                    </span>
+                  )}
                 </div>
                 <br />
                 Hotel's Image: <br />
@@ -162,11 +168,11 @@ export const HotelCreateDialog = ({
                 justifyContent: 'center',
                 paddingTop: '20px',
               }}
-            > 
+            >
               <button
                 type="submit"
                 style={{
-                  backgroundColor: CheckId()?'grey':'#4CAF50',
+                  backgroundColor: CheckId() ? 'grey' : '#4CAF50',
                   color: 'white',
                   padding: '10px 20px',
                   border: 'none',

@@ -31,7 +31,7 @@ export const HotelUpdateDialog = ({
         dataUpdate
       )
       .then((data) => {
-      setReload(!reload);
+        setReload(!reload);
       })
       .catch((err) => console.error);
     setDataUpdate(initialState);
