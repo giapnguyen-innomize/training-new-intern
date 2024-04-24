@@ -21,20 +21,9 @@ export const HotelCreateDialog = ({
 }: HotelCreate) => {
   const [image, setImage] = useState(Object);
   const { hotelInfoList } = useHotelContext();
-  const checkId = () => {
-    const check = hotelInfoList.map((item) => {
-      if (item.hotelId === formData.hotelId) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-    return check[0];
-  };
   const handleInputCreate = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    checkId();
   };
   const handleCreate = async (e: any) => {
     e.preventDefault();
@@ -135,11 +124,6 @@ export const HotelCreateDialog = ({
                     value={formData.hotelId}
                     onChange={handleInputCreate}
                   />
-                  {checkId() && (
-                    <span style={{ color: 'red' }}>
-                      The hotel id must be unique !
-                    </span>
-                  )}
                 </div>
                 <br />
                 Hotel's Image: <br />
@@ -170,7 +154,7 @@ export const HotelCreateDialog = ({
               <button
                 type="submit"
                 style={{
-                  backgroundColor: checkId() ? 'grey' : '#4CAF50',
+                  backgroundColor: '#4CAF50',
                   color: 'white',
                   padding: '10px 20px',
                   border: 'none',
@@ -178,7 +162,6 @@ export const HotelCreateDialog = ({
                   borderRadius: '5px',
                   marginLeft: '10px',
                 }}
-                disabled={checkId()}
               >
                 Create
               </button>

@@ -29,13 +29,20 @@ export class HotelController {
   // Create new hotel items
   @Post('hotel')
   async createHotel(@Body() hotelData: Hotel): Promise<ApiResponse> {
-    const {error,value}= createHotelSchema.validate(hotelData)
-    if(error){
-      console.error(error)
-      return {message:`Create Hotel failure! ${error.message}`,data:{type:'error'}}
+    const { error, value } = createHotelSchema.validate(hotelData);
+    if (error) {
+      console.error(error);
+      return {
+        message: `Create Hotel failure! ${error.message}`,
+        data: { type: 'error' },
+      };
     }
     const created = await this.hotelService.addHotelData(hotelData);
-    return { message: 'Hotel item created successfully', data: created }; //, data: created
+    if(created){
+      return { message: 'create a hotel success', data: hotelData };
+    } else {
+      return { message: `HotelID must unique`, data: { type: 'error' } };
+    }
   }
   //Update hotel
   @Put(':hotelId/:name')
@@ -44,10 +51,13 @@ export class HotelController {
     @Param('name') name: string,
     @Body() dataUpdate: Hotel
   ): Promise<ApiResponse> {
-    const {error,value}= createHotelSchema.validate(dataUpdate)
-    if(error){
-      console.error(error)
-      return {message:`Create Hotel failure! ${error.message}`,data:{type:'error'}}
+    const { error, value } = createHotelSchema.validate(dataUpdate);
+    if (error) {
+      console.error(error);
+      return {
+        message: `Create Hotel failure! ${error.message}`,
+        data: { type: 'error' },
+      };
     }
     const updated = await this.hotelService.updateHotelItem(
       hotelId,
