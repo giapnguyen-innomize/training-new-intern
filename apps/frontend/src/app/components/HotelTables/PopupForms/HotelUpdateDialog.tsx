@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { initialState } from '../../../context/HotelProvider';
+
 interface HotelUpdate {
   dataUpdate: any;
   setDataUpdate: any;
@@ -7,6 +9,7 @@ interface HotelUpdate {
   setReload: any;
   setOpenUpdate: any;
 }
+
 export const HotelUpdateDialog = ({
   dataUpdate,
   setDataUpdate,
@@ -14,12 +17,6 @@ export const HotelUpdateDialog = ({
   setReload,
   setOpenUpdate,
 }: HotelUpdate) => {
-  const initialState = {
-    name: '',
-    hotelId: '',
-    descript: '',
-    image: '',
-  };
   const [image, setImage] = useState(Object);
   const handleInputUpdate = (e: any) => {
     const { name, value } = e.target;
@@ -34,9 +31,9 @@ export const HotelUpdateDialog = ({
         dataUpdate
       )
       .then((data) => {
-        console.log(data), setReload(!reload);
+      setReload(!reload);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error);
     setDataUpdate(initialState);
     setOpenUpdate(false);
   };

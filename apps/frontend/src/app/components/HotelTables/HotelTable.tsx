@@ -1,37 +1,46 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useState } from 'react';
 import axios from 'axios';
-import styles from "../../app.module.css"
+import styles from '../../app.module.css';
 import { HotelUpdateDialog } from './PopupForms/HotelUpdateDialog';
 import { HotelCreateDialog } from './PopupForms/HotelCreateDialog';
-import { useHotelContext } from '../../reactContext/HotelProvider';
+import { useHotelContext } from '../../context/HotelProvider';
+
+const initialState = {
+  name: '',
+  hotelId: '',
+  descript: '',
+  image: {},
+};
+interface Image {
+  secureUrl: string;
+  publicId: string;
+}
+interface Item {
+  name: string;
+  hotelId: string;
+  descript?: string;
+  image?: Image;
+}
+
 export function HotelTable() {
-  const initialState = {
-    name: '',
-    hotelId: '',
-    descript: '',
-    image: {},
-  };
   const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [openUpdate, setOpenUpdate] = useState<boolean>(false);
   const [formData, setFormData] = useState(initialState);
   const [dataUpdate, setDataUpdate] = useState(initialState);
-
-  const { hotelInfoList, setHotelInfoList, reload, setReload } =
-    useHotelContext();
-
+  const { hotelInfoList, reload, setReload } = useHotelContext();
   const handleDelete = async (item: any) => {
     if (!item) return;
     if (window.confirm(`Do you want to delete ${item.name} hotel?`)) {
       await axios
         .delete(`http://localhost:3000/api/${item.hotelId}/${item.name}`)
         .then((data) => {
-          console.log(data), setReload(!reload);
+          setReload(!reload);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.error);
     } else return;
   };
-  const handleDeleteImage = async (publicId: string, item: any) => {
+  const handleDeleteImage = async (publicId: string, item: Item) => {
     if (window.confirm('Do you want delete this image')) {
       const { image, ...dataUpdate } = item;
       try {
@@ -44,13 +53,12 @@ export function HotelTable() {
             dataUpdate
           )
           .then((data) => {
-            console.log(data), setReload(!reload);
+            setReload(!reload);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => console.error);
         setReload(!reload);
-        return res.data.message;
       } catch (error) {
-        console.log(error);
+       console.error
       }
     }
   };
@@ -116,7 +124,12 @@ export function HotelTable() {
               <td>{item.descript}</td>
               <td>
                 {item?.image?.secureUrl && (
-                  <button style={{marginLeft:'240px',backgroundColor:'smoke',cursor:'pointer'}}
+                  <button
+                    style={{
+                      marginLeft: '240px',
+                      backgroundColor: 'smoke',
+                      cursor: 'pointer',
+                    }}
                     onClick={() => handleDeleteImage(item.image.publicId, item)}
                   >
                     delete

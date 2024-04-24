@@ -12,17 +12,6 @@ import {
 import { HotelService } from './hotel.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
-import { createHotelSchema } from '../validate/validateCreateHotelForm';
-interface Hotel {
-  name: string;
-  hotelId: string;
-  descript: string;
-  image: { secureUrl: string; publicId: string };
-}
-interface ApiResponse {
-  message: string;
-  data: object;
-}
 @Controller()
 export class HotelController {
   constructor(
@@ -31,27 +20,23 @@ export class HotelController {
   ) {}
   //Get all hotel table infor
   @Get('hotel')
-  async getAll(): Promise<Hotel> {
+  async getAll(): Promise<ApiResponse> {
     const tableName = 'hotel';
-    return this.hotelService.getData(tableName);
+    const response= await this.hotelService.getData(tableName);
+    return {message:'get hotel data success!', data:{response}}
   }
   // Create new hotel items
   @Post('hotel')
-  async createHotel(@Body() hotelData: any): Promise<ApiResponse> {
-    const { error, value }=createHotelSchema.validate(hotelData)
-    if (error) {
-      return  { message:error.details[0].message, data:{type:'error'}}
-    }else{
-      const created = await this.hotelService.addHotelData(hotelData);
-      return { message: 'Hotel item created successfully', data: created };
-    }
+  async createHotel(@Body() hotelData: Hotel): Promise<ApiResponse> {
+    const created = await this.hotelService.addHotelData(hotelData);
+    return { message: 'Hotel item created successfully', data: created }; //, data: created
   }
   //Update hotel
   @Put(':hotelId/:name')
   async updateHotel(
     @Param('hotelId') hotelId: string,
     @Param('name') name: string,
-    @Body() dataUpdate: any
+    @Body() dataUpdate: Hotel
   ): Promise<ApiResponse> {
     const updated = await this.hotelService.updateHotelItem(
       hotelId,
@@ -69,11 +54,9 @@ export class HotelController {
   }
   //Delete Image
   @Post('delete/image')
-  async deleteImage(@Body() publicId: object): Promise<ApiResponse> {
+  async deleteImage(@Body() publicId: string): Promise<ApiResponse> {
     try {
-      await this.cloudinaryService.deleteImage(
-        Object.values(publicId).toString()
-      );
+      await this.cloudinaryService.deleteImage(publicId);
       return { message: 'Image deleted successfully', data: { publicId } };
     } catch (error) {
       throw new Error('Error deleting image: ' + error.message)
@@ -88,7 +71,7 @@ export class HotelController {
     const deleted = await this.hotelService.deleteHotelItem(hotelId, hotelName);
     return {
       message: `Hotel  item delete successfully`,
-      data: { id: `${deleted.hotelId}`, name: `${deleted.hotelName}` },
+      data: { message:deleted.message , data:deleted.data  },
     };
   }
 }

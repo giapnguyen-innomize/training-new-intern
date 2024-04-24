@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { useHotelContext } from '../../../reactContext/HotelProvider';
+import { useHotelContext } from '../../../context/HotelProvider';
+import { initialState } from '../../../context/HotelProvider';
 interface HotelCreate {
   formData: any;
   setFormData: any;
@@ -9,6 +10,7 @@ interface HotelCreate {
   setReload: any;
   setOpenCreate: any;
 }
+
 export const HotelCreateDialog = ({
   formData,
   setFormData,
@@ -16,12 +18,6 @@ export const HotelCreateDialog = ({
   setReload,
   setOpenCreate,
 }: HotelCreate) => {
-  const initialState = {
-    name: '',
-    hotelId: '',
-    descript: '',
-    image: {},
-  };
   const [image, setImage] = useState(Object);
   const { hotelInfoList } = useHotelContext();
   console.log(hotelInfoList);
@@ -48,14 +44,13 @@ export const HotelCreateDialog = ({
       .post('http://localhost:3000/api/hotel', formData)
       .then((data) => {
         data.data.data.type == 'error'
-          ? toast.error(data.data.message)
-          : toast.success(data.data.message);
+        ? toast.error(data.data.message)
+        : toast.success(data.data.message);
+        setReload(!reload);
       })
-      .catch((err) => console.log(err));
-
+      .catch((err) => console.error);
     setFormData(initialState);
     setOpenCreate(false);
-    setReload(!reload);
   };
   const handleChangeImg = async (e: any) => {
     const img = e.target.files[0];
