@@ -58,7 +58,7 @@ export function HotelTable() {
           .catch((err) => console.error);
         setReload(!reload);
       } catch (error) {
-        console.log(error);
+       console.error
       }
     }
   };

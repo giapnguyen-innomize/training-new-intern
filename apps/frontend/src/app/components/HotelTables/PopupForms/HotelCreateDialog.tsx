@@ -30,7 +30,7 @@ export const HotelCreateDialog = ({
       .then((data) => {
         setReload(!reload);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error);
     setFormData(initialState);
     setOpenCreate(false);
   };
