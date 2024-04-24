@@ -1,6 +1,8 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { initialState } from '../../../context/HotelProvider';
+import styles from "./hotelUpdateDialog.module.css"
+import { toast } from 'react-toastify';
 
 interface HotelUpdate {
   dataUpdate: any;
@@ -32,6 +34,7 @@ export const HotelUpdateDialog = ({
       )
       .then((data) => {
         setReload(!reload);
+        toast.success("Update hotel success!")
       })
       .catch((err) => console.error(err));
     setDataUpdate(initialState);
@@ -57,46 +60,21 @@ export const HotelUpdateDialog = ({
   };
   return (
     <div
-      style={{
-        display: 'block',
-        position: 'fixed',
-        zIndex: 1,
-        left: 0,
-        top: 0,
-        width: '100%',
-        height: '100%',
-        overflow: 'auto',
-        backgroundColor: 'rgba(0,0,0,0.4)',
-      }}
+      className={styles.container}
     >
       <div
-        style={{
-          backgroundColor: '#fefefe',
-          margin: '15% auto',
-          padding: '50px',
-          border: '1px solid #888',
-          width: '95%',
-          display: 'ruby-text',
-          maxWidth: '500px',
-        }}
-      >
+      className={styles.modal}
+      ><h2>Update Hotel Information</h2>
         <span
-          style={{
-            color: '#aaa',
-            float: 'right',
-            fontSize: '25px',
-            fontWeight: 'bold',
-            cursor: 'pointer',
-            paddingLeft: '5px',
-          }}
+          className={styles.close_btn}
           onClick={() => setOpenUpdate(false)}
         >
           &times;
         </span>
-        <h2>Update Hotel Information</h2>
+        
         <form onSubmit={handleUpdate}>
-          <div style={{ display: 'block' }}>
-            <div style={{ paddingBottom: '10px' }}>
+          <div >
+            <div className={styles.formGroup} >
               Hotel Name:
               <input
                 type="text"
@@ -104,10 +82,10 @@ export const HotelUpdateDialog = ({
                 placeholder="Hotel Name"
                 name="name"
                 value={dataUpdate.name}
-                style={{ display: 'block' }}
+                
               />
             </div>
-            <div>
+            <div className={styles.formGroup}>
               Hotel ID:
               <input
                 type="text"
@@ -115,10 +93,10 @@ export const HotelUpdateDialog = ({
                 placeholder="Hotel Id"
                 name="hotelId"
                 value={dataUpdate.hotelId}
-                style={{ display: 'block' }}
+                
               />
             </div>
-            <div style={{ display: 'block' }}>
+            <div className={styles.formGroup}>
               Hotel Image:
               <div>
                 <img
@@ -139,7 +117,7 @@ export const HotelUpdateDialog = ({
               onChange={handleChangeImg}
             />
             <br />
-            <div>
+            <div className={styles.formGroup}>
               Description: <br />
               <textarea
                 placeholder="Description..."
@@ -152,25 +130,11 @@ export const HotelUpdateDialog = ({
             </div>
           </div>
           <div
-            style={{
-              display: 'block',
-              alignItems: 'center',
-              textAlign: 'center',
-              justifyContent: 'center',
-              paddingTop: '20px',
-            }}
+           style={{ textAlign: 'center' }}
           >
             <button
               type="submit"
-              style={{
-                backgroundColor: '#4CAF50',
-                color: 'white',
-                padding: '10px 20px',
-                border: 'none',
-                cursor: 'pointer',
-                borderRadius: '5px',
-                marginLeft: '10px',
-              }}
+             className={styles.submitButton}
             >
               Update
             </button>

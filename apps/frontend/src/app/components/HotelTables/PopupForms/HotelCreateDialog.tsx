@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useHotelContext } from '../../../context/HotelProvider';
 import { initialState } from '../../../context/HotelProvider';
-
+import styles from './hotelCreateDialog.module.css';
 interface HotelCreate {
   formData: any;
   setFormData: any;
@@ -70,41 +70,9 @@ export const HotelCreateDialog = ({
     }
   };
   return (
-    <div
-      style={{
-        display: 'block',
-        position: 'fixed',
-        zIndex: 1,
-        left: 0,
-        top: 0,
-        width: '100%',
-        height: '100%',
-        overflow: 'auto',
-        backgroundColor: 'rgba(0,0,0,0.4)',
-      }}
-    >
-      <div
-        style={{
-          backgroundColor: '#fefefe',
-          margin: '15% auto',
-          padding: '50px',
-          border: '1px solid #888',
-          width: '80%',
-          display: 'ruby-text',
-          maxWidth: '800px',
-        }}
-      >
-        <span
-          style={{
-            color: '#aaa',
-            float: 'right',
-            fontSize: '25px',
-            fontWeight: 'bold',
-            cursor: 'pointer',
-            paddingLeft: '5px',
-          }}
-          onClick={() => setOpenCreate(false)}
-        >
+    <div className={styles.container}>
+      <div className={styles.modal}>
+        <span className={styles.close_btn} onClick={() => setOpenCreate(false)}>
           &times;
         </span>
         <div>
@@ -158,26 +126,12 @@ export const HotelCreateDialog = ({
                 </div>
               </div>
             </div>
-            <div
-              style={{
-                display: 'block',
-                alignItems: 'center',
-                textAlign: 'center',
-                justifyContent: 'center',
-                paddingTop: '20px',
-              }}
-            >
+            <div style={{ alignItems: 'center', textAlign: 'center' }}>
               <button
                 type="submit"
-                style={{
-                  backgroundColor: checkId() ? 'grey' : '#4CAF50',
-                  color: 'white',
-                  padding: '10px 20px',
-                  border: 'none',
-                  cursor: 'pointer',
-                  borderRadius: '5px',
-                  marginLeft: '10px',
-                }}
+                className={`${styles.create_btn} ${
+                  checkId() && styles.disable_btn
+                }`}
                 disabled={checkId()}
               >
                 Create
