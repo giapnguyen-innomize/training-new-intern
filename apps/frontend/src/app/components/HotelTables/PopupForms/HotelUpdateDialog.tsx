@@ -33,7 +33,7 @@ export const HotelUpdateDialog = ({
       .then((data) => {
         setReload(!reload);
       })
-      .catch((err) => console.error);
+      .catch((err) => console.error(err));
     setDataUpdate(initialState);
     setOpenUpdate(false);
   };

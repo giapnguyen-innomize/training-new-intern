@@ -21,8 +21,7 @@ export const HotelCreateDialog = ({
 }: HotelCreate) => {
   const [image, setImage] = useState(Object);
   const { hotelInfoList } = useHotelContext();
-  console.log(hotelInfoList);
-  const CheckId = () => {
+  const checkId = () => {
     const check = hotelInfoList.map((item) => {
       if (item.hotelId === formData.hotelId) {
         return true;
@@ -32,11 +31,10 @@ export const HotelCreateDialog = ({
     });
     return check[0];
   };
-  console.log(CheckId());
   const handleInputCreate = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    CheckId();
+    checkId();
   };
   const handleCreate = async (e: any) => {
     e.preventDefault();
@@ -49,7 +47,7 @@ export const HotelCreateDialog = ({
           : toast.success(data.data.message);
         setReload(!reload);
       })
-      .catch((err) => console.error);
+      .catch((err) => console.error(err));
     setFormData(initialState);
     setOpenCreate(false);
   };
@@ -137,7 +135,7 @@ export const HotelCreateDialog = ({
                     value={formData.hotelId}
                     onChange={handleInputCreate}
                   />
-                  {CheckId() && (
+                  {checkId() && (
                     <span style={{ color: 'red' }}>
                       The hotel id must be unique !
                     </span>
@@ -172,7 +170,7 @@ export const HotelCreateDialog = ({
               <button
                 type="submit"
                 style={{
-                  backgroundColor: CheckId() ? 'grey' : '#4CAF50',
+                  backgroundColor: checkId() ? 'grey' : '#4CAF50',
                   color: 'white',
                   padding: '10px 20px',
                   border: 'none',
@@ -180,7 +178,7 @@ export const HotelCreateDialog = ({
                   borderRadius: '5px',
                   marginLeft: '10px',
                 }}
-                disabled={CheckId()}
+                disabled={checkId()}
               >
                 Create
               </button>
