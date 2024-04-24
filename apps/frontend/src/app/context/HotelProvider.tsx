@@ -44,7 +44,7 @@ export const HotelProvider: React.FC<{ children: ReactNode }> = ({
         .then(({ data }: { data: HotelInfo[] }) => {
           setHotelInfoList(data);
         })
-        .catch((error) => console.error);
+        .catch((error) => console.error(error));
     };
     fetchApi();
   }, [reload]);

@@ -12,6 +12,7 @@ import {
 import { HotelService } from './hotel.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
+
 @Controller()
 export class HotelController {
   constructor(
@@ -20,10 +21,10 @@ export class HotelController {
   ) {}
   //Get all hotel table infor
   @Get('hotel')
-  async getAll(): Promise<ApiResponse> {
+  async getAll(): Promise<object> {
     const tableName = 'hotel';
-    const response= await this.hotelService.getData(tableName);
-    return {message:'get hotel data success!', data:{response}}
+
+    return await this.hotelService.getData(tableName);
   }
   // Create new hotel items
   @Post('hotel')
@@ -71,7 +72,7 @@ export class HotelController {
     const deleted = await this.hotelService.deleteHotelItem(hotelId, hotelName);
     return {
       message: `Hotel  item delete successfully`,
-      data: { message:deleted.message , data:deleted.data  },
+      data: { message: deleted.message, data: deleted.data },
     };
   }
 }

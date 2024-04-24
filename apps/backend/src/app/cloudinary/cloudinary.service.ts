@@ -33,7 +33,7 @@ export class CloudinaryService {
   async deleteImage(publicId: string): Promise<ApiResponse> {
     try {
       await cloudinary.uploader.destroy(publicId);
-      return { message:'delete image success', data:{publicId} };
+      return { message: 'delete image success', data: { publicId } };
     } catch (error) {
       throw new Error('Error deleting image from Cloudinary: ' + error.message);
     }

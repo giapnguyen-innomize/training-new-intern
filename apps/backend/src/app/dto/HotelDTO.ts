@@ -6,11 +6,9 @@ interface Hotel {
   name: string;
   hotelId: string;
   descript?: string;
-  image?: Image
+  image?: Image;
 }
 interface ApiResponse {
   message: string;
   data: object;
 }
-
-
