@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useState } from 'react';
 import { initialState } from '../../../context/HotelProvider';
 import styles from './hotelUpdateDialog.module.scss';
-import { toast } from 'react-toastify';
 
 interface HotelUpdate {
   dataUpdate: any;
@@ -34,7 +33,6 @@ export const HotelUpdateDialog = ({
       )
       .then((data) => {
         setReload(!reload);
-        toast.success('Update hotel success!');
       })
       .catch((err) => console.error(err));
     setDataUpdate(initialState);
@@ -60,15 +58,18 @@ export const HotelUpdateDialog = ({
   };
   return (
     <div className={styles.container}>
-      <div className={styles.modal}>
+      <div className={styles.container__modal}>
         <h2>Update Hotel Information</h2>
-        <span className={styles.close_btn} onClick={() => setOpenUpdate(false)}>
+        <span
+          className={styles.container__close_Btn}
+          onClick={() => setOpenUpdate(false)}
+        >
           &times;
         </span>
 
         <form onSubmit={handleUpdate}>
-          <div>
-            <div className={styles.formGroup}>
+          <div className={styles.container__formGroup}>
+            <div>
               Hotel Name:
               <input
                 type="text"
@@ -78,7 +79,7 @@ export const HotelUpdateDialog = ({
                 value={dataUpdate.name}
               />
             </div>
-            <div className={styles.formGroup}>
+            <div>
               Hotel ID:
               <input
                 type="text"
@@ -88,7 +89,7 @@ export const HotelUpdateDialog = ({
                 value={dataUpdate.hotelId}
               />
             </div>
-            <div className={styles.formGroup}>
+            <div>
               Hotel Image:
               <div>
                 <img
@@ -109,7 +110,7 @@ export const HotelUpdateDialog = ({
               onChange={handleChangeImg}
             />
             <br />
-            <div className={styles.formGroup}>
+            <div className={styles.container__formGroup}>
               Description: <br />
               <textarea
                 placeholder="Description..."
@@ -122,7 +123,7 @@ export const HotelUpdateDialog = ({
             </div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <button type="submit" className={styles.submitButton}>
+            <button type="submit" className={styles.container__submitButton}>
               Update
             </button>
           </div>

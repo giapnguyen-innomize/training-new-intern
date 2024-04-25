@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 import { initialState } from '../../../context/HotelProvider';
 import styles from './hotelCreateDialog.module.scss';
 interface HotelCreate {
@@ -10,6 +9,7 @@ interface HotelCreate {
   setReload: any;
   setOpenCreate: any;
 }
+
 export const HotelCreateDialog = ({
   formData,
   setFormData,
@@ -28,9 +28,6 @@ export const HotelCreateDialog = ({
     await axios
       .post('http://localhost:3000/api/hotel', formData)
       .then((data) => {
-        data.data.data.type === 'error'
-          ? toast.error(data.data.message)
-          : toast.success(data.data.message);
         setReload(!reload);
       })
       .catch((err) => console.error(err));
@@ -57,8 +54,11 @@ export const HotelCreateDialog = ({
   };
   return (
     <div className={styles.container}>
-      <div className={styles.modal}>
-        <span className={styles.close_btn} onClick={() => setOpenCreate(false)}>
+      <div className={styles.container__modal}>
+        <span
+          className={styles.container__close_Btn}
+          onClick={() => setOpenCreate(false)}
+        >
           &times;
         </span>
         <div>
@@ -108,7 +108,7 @@ export const HotelCreateDialog = ({
               </div>
             </div>
             <div style={{ alignItems: 'center', textAlign: 'center' }}>
-              <button type="submit" className={styles.create_btn}>
+              <button type="submit" className={styles.container__create_Btn}>
                 Create
               </button>
             </div>

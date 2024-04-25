@@ -8,50 +8,53 @@
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
-}
-.modal {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 50px;
-  text-align: -webkit-center;
-  border: 1px solid #888;
-  width: 40%;
-  display: block;
-}
-.close_btn {
-  color: #aaa;
-  float: right;
-  font-size: 25px;
-  font-weight: bold;
-  cursor: pointer;
-  padding-left: 5px;
-}
-.close_btn:hover {
-  color: red;
-}
-.submitButton {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-}
+  &__modal {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 50px;
+    text-align: -webkit-center;
+    border: 1px solid #888;
+    width: 40%;
+    display: block;
+  }
+  &__close_Btn {
+    color: #aaa;
+    float: right;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    padding-left: 5px;
 
-.submitButton:hover {
-  background-color: #0056b3;
-}
-.formGroup {
-  margin-bottom: 20px;
-}
-.formGroup input[type='text'],
-.formGroup textarea {
-  width: 50%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-.formGroup input[type='file'] {
-  width: 50%;
-  padding: 10px;
+    &:hover {
+      color: red;
+    }
+  }
+  &__formGroup {
+    div {
+      margin-bottom: 20px;
+    }
+    input[type='text'],
+    textarea {
+      width: 50%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    input[type='file'] {
+      width: 50%;
+      padding: 10px;
+    }
+  }
+  &__submitButton {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
 }

@@ -13,54 +13,49 @@ body {
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-input {
-  padding: 5px;
-}
-
-h1 {
-  text-align: center;
-}
-.create_btn {
-  width: 120px;
-  height: 50px;
-  border: solid 1px;
-  background-color: #f2f2f2;
-  cursor: pointer;
-  border-radius: 5px;
-}
-.create_btn:hover {
-  background-color: aquamarine;
-}
-.delete_btn {
-  background-color: silver;
-  cursor: pointer;
-}
-.update_btn {
-  background-color: rgb(103, 240, 194);
-  cursor: pointer;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-th,
-td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
-}
-
-th {
-  background-color: #f2f2f2;
-}
-
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-tr:hover {
-  background-color: #f2f2f2;
+  input {
+    padding: 5px;
+  }
+  h1 {
+    text-align: center;
+  }
+  &__create_btn {
+    width: 120px;
+    height: 50px;
+    border: solid 1px;
+    background-color: #f2f2f2;
+    cursor: pointer;
+    border-radius: 5px;
+    &:hover {
+      background-color: aquamarine;
+    }
+  }
+  &__delete_btn {
+    background-color: silver;
+    cursor: pointer;
+  }
+  &__update_btn {
+    background-color: rgb(103, 240, 194);
+    cursor: pointer;
+  }
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    tr:hover {
+      background-color: #f2f2f2;
+    }
+  }
 }
