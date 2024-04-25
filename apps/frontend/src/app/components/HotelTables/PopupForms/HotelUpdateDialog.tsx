@@ -61,7 +61,7 @@ export const HotelUpdateDialog = ({
       <div className={styles.container__modal}>
         <h2>Update Hotel Information</h2>
         <span
-          className={styles.container__close_Btn}
+          className={styles.container__closeBtn}
           onClick={() => setOpenUpdate(false)}
         >
           &times;

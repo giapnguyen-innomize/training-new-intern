@@ -60,7 +60,7 @@ export const HotelCreateDialog = ({
     <div className={styles.container}>
       <div className={styles.container__modal}>
         <span
-          className={styles.container__close_Btn}
+          className={styles.container__closeBtn}
           onClick={() => setOpenCreate(false)}
         >
           &times;
@@ -112,7 +112,7 @@ export const HotelCreateDialog = ({
               </div>
             </div>
             <div style={{ alignItems: 'center', textAlign: 'center' }}>
-              <button type="submit" className={styles.container__create_Btn}>
+              <button type="submit" className={styles.container__createBtn}>
                 Create
               </button>
             </div>

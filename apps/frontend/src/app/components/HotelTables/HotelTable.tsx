@@ -68,7 +68,7 @@ export function HotelTable() {
   return (
     <div className={styles.container}>
       <button
-        className={styles.container__create_btn}
+        className={styles.container__createBtn}
         onClick={() => setOpenCreate((pre) => !pre)}
       >
         Add new hotel
@@ -117,7 +117,7 @@ export function HotelTable() {
               <td>
                 {item?.image?.secureUrl && (
                   <button
-                    className={styles.container__delete_btn}
+                    className={styles.container__deleteBtn}
                     style={{ marginLeft: '275px' }}
                     onClick={() => handleDeleteImage(item.image.publicId, item)}
                   >
@@ -128,7 +128,7 @@ export function HotelTable() {
               </td>
               <td>
                 <button
-                  className={styles.container__update_btn}
+                  className={styles.container__updateBtn}
                   onClick={() => {
                     setDataUpdate(item);
                     setOpenUpdate(true);
@@ -139,7 +139,7 @@ export function HotelTable() {
               </td>
               <td>
                 <button
-                  className={styles.containter__delete_btn}
+                  className={styles.containter__deleteBtn}
                   onClick={() => {
                     handleDelete(item);
                   }}
