@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { initialState } from '../../../context/HotelProvider';
 import styles from './hotelCreateDialog.module.scss';
 interface HotelCreate {
@@ -28,6 +29,9 @@ export const HotelCreateDialog = ({
     await axios
       .post('http://localhost:3000/api/hotel', formData)
       .then((data) => {
+        data.data.data.type === 'error'
+        ? toast.error(data.data.message)
+        : toast.success(data.data.message);
         setReload(!reload);
       })
       .catch((err) => console.error(err));

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { HotelUpdateDialog } from './PopupForms/HotelUpdateDialog';
 import { HotelCreateDialog } from './PopupForms/HotelCreateDialog';
 import { useHotelContext } from '../../context/HotelProvider';
+import styles from '../../app.module.css';
 
 const initialState = {
   name: '',
@@ -52,7 +53,6 @@ export function HotelTable() {
             dataUpdate
           )
           .then((data) => {
-            toast.success('Image deleted success');
             setReload(!reload);
           })
           .catch((err) => console.error(err));
