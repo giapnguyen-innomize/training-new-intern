@@ -35,8 +35,7 @@ export class HotelController {
       return {
         message: `Create Hotel failure! ${error.message}`,
         data: { type: 'error' },
-      };
-    }
+      };}
     const created = await this.hotelService.addHotelData(hotelData);
     if(created){
       return { message: 'create a hotel success', data: hotelData };
@@ -53,7 +52,6 @@ export class HotelController {
   ): Promise<ApiResponse> {
     const { error, value } = createHotelSchema.validate(dataUpdate);
     if (error) {
-      console.error(error);
       return {
         message: `Create Hotel failure! ${error.message}`,
         data: { type: 'error' },
