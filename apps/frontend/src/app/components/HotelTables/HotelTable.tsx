@@ -37,7 +37,7 @@ export function HotelTable() {
         .then((data) => {
           setReload(!reload);
         })
-        .catch((err) => console.error);
+        .catch((err) => console.error(err));
     } else return;
   };
   const handleDeleteImage = async (publicId: string, item: Item) => {
@@ -55,10 +55,10 @@ export function HotelTable() {
           .then((data) => {
             setReload(!reload);
           })
-          .catch((err) => console.error);
+          .catch((err) => console.error(err));
         setReload(!reload);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
   };

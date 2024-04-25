@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useHotelContext } from '../../../context/HotelProvider';
 import { initialState } from '../../../context/HotelProvider';
 
 interface HotelCreate {
@@ -18,6 +20,7 @@ export const HotelCreateDialog = ({
   setOpenCreate,
 }: HotelCreate) => {
   const [image, setImage] = useState(Object);
+  const { hotelInfoList } = useHotelContext();
   const handleInputCreate = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -28,9 +31,12 @@ export const HotelCreateDialog = ({
     await axios
       .post('http://localhost:3000/api/hotel', formData)
       .then((data) => {
+        data.data.data.type === 'error'
+          ? toast.error(data.data.message)
+          : toast.success(data.data.message);
         setReload(!reload);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
     setFormData(initialState);
     setOpenCreate(false);
   };
@@ -98,6 +104,7 @@ export const HotelCreateDialog = ({
                 <div style={{ paddingBottom: '10px' }}>
                   Name:
                   <input
+                    required
                     style={{ display: 'block' }}
                     type="text"
                     placeholder="Hotel Name"
@@ -109,6 +116,7 @@ export const HotelCreateDialog = ({
                 <div>
                   Hotel ID:
                   <input
+                    required
                     style={{ display: 'block' }}
                     type="text"
                     placeholder="Hotel Id"
