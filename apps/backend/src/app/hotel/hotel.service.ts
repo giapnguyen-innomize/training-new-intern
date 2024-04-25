@@ -3,7 +3,9 @@ import { DynamoDB } from 'aws-sdk';
 import * as AWS from 'aws-sdk';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import 'dotenv/config';
-import config from 'aws-sdk/lib/maintenance_mode_message';;
+import config from 'aws-sdk/lib/maintenance_mode_message';
+import { HotelInfo } from 'models';
+
 config.suppress = true;
 @Injectable()
 export class HotelService {
@@ -14,7 +16,7 @@ export class HotelService {
     });
   };
   // Get hotel table data
-  async getData(tableName: string): Promise<any> {
+  async getData(tableName: string): Promise<object> {
     try {
       const results = await this.dynamoDBClient()
         .scan({
@@ -28,43 +30,52 @@ export class HotelService {
     }
   }
   // Create new hotel item
-  async addHotelData(hotelData: any): Promise<any> {
+  async addHotelData(hotelData: HotelInfo): Promise<ApiResponse> {
+    const { hotelId, name, descript, image } = hotelData;
     const params: DynamoDB.DocumentClient.PutItemInput = {
       TableName: 'hotel',
-      Item: hotelData,
+      Item: {
+        hotelId: hotelId,
+        name: name,
+        description: descript,
+        image: image,
+      },
+      ConditionExpression: 'attribute_not_exists(hotelId)',
     };
     try {
-      const createdHotel = await this.dynamoDBClient().put(params).promise();
-      return hotelData;
+      await this.dynamoDBClient().put(params).promise();
+      return { message: 'Create a hotel success', data: hotelData };
     } catch (error) {
-      console.error('Error adding hotel data:', error);
-      throw error;
+      console.error(error);
     }
   }
   //update hotel item
   async updateHotelItem(
     hotelId: string,
     name: string,
-    dataUpdate: any
-  ): Promise<any> {
+    dataUpdate: HotelInfo
+  ): Promise<ApiResponse> {
     const params: DynamoDB.DocumentClient.PutItemInput = {
       TableName: 'hotel',
       Item: {
         hotelId: dataUpdate.hotelId,
-        name: dataUpdate.name,
+        name: name,
         ...dataUpdate,
       },
     };
     try {
       await this.dynamoDBClient().put(params).promise();
-      return dataUpdate;
+      return { message: 'data updated successful', data: { dataUpdate } };
     } catch (error) {
       console.error(`Error updating hotel item with ID ${hotelId}:`, error);
       throw error;
     }
   }
   //Delete item
-  async deleteHotelItem(hotelId: string, hotelName: string): Promise<any> {
+  async deleteHotelItem(
+    hotelId: string,
+    hotelName: string
+  ): Promise<ApiResponse> {
     const params: DynamoDB.DocumentClient.DeleteItemInput = {
       TableName: 'hotel',
       Key: {
@@ -74,7 +85,7 @@ export class HotelService {
     };
     try {
       await this.dynamoDBClient().delete(params).promise();
-      return { hotelId, hotelName };
+      return { message: hotelId, data: { hotelName } };
     } catch (error) {
       console.error(`Error deleting hotel item with ID ${hotelId}:`, error);
       throw error;
