@@ -1,11 +1,9 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useState } from 'react';
 import axios from 'axios';
-import styles from './hotel.module.scss';
 import { HotelUpdateDialog } from './PopupForms/HotelUpdateDialog';
 import { HotelCreateDialog } from './PopupForms/HotelCreateDialog';
 import { useHotelContext } from '../../context/HotelProvider';
-import { toast } from 'react-toastify';
 
 const initialState = {
   name: '',
@@ -36,7 +34,6 @@ export function HotelTable() {
       await axios
         .delete(`http://localhost:3000/api/${item.hotelId}/${item.name}`)
         .then((data) => {
-          toast.success('Hotel deleted sucess');
           setReload(!reload);
         })
         .catch((err) => console.error(err));
