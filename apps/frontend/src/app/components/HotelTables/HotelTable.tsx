@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useState } from 'react';
 import axios from 'axios';
-import styles from "./hotel.module.css"
+import styles from './hotel.module.scss';
 import { HotelUpdateDialog } from './PopupForms/HotelUpdateDialog';
 import { HotelCreateDialog } from './PopupForms/HotelCreateDialog';
 import { useHotelContext } from '../../context/HotelProvider';
@@ -36,7 +36,7 @@ export function HotelTable() {
       await axios
         .delete(`http://localhost:3000/api/${item.hotelId}/${item.name}`)
         .then((data) => {
-          toast.success("Hotel deleted sucess")
+          toast.success('Hotel deleted sucess');
           setReload(!reload);
         })
         .catch((err) => console.error(err));
@@ -55,7 +55,7 @@ export function HotelTable() {
             dataUpdate
           )
           .then((data) => {
-            toast.success("Image deleted success")
+            toast.success('Image deleted success');
             setReload(!reload);
           })
           .catch((err) => console.error(err));
@@ -120,18 +120,18 @@ export function HotelTable() {
               <td>
                 {item?.image?.secureUrl && (
                   <button
-                   className={styles.delete_btn}
-                   style={{marginLeft:'275px'}}
+                    className={styles.delete_btn}
+                    style={{ marginLeft: '275px' }}
                     onClick={() => handleDeleteImage(item.image.publicId, item)}
                   >
-                     x 
+                    x
                   </button>
                 )}
                 <img src={item?.image?.secureUrl}></img>
               </td>
               <td>
                 <button
-                 className={styles.update_btn}
+                  className={styles.update_btn}
                   onClick={() => {
                     setDataUpdate(item);
                     setOpenUpdate(true);
@@ -142,7 +142,7 @@ export function HotelTable() {
               </td>
               <td>
                 <button
-                 className={styles.delete_btn}
+                  className={styles.delete_btn}
                   onClick={() => {
                     handleDelete(item);
                   }}

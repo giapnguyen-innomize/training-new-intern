@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { useHotelContext } from '../../../context/HotelProvider';
 import { initialState } from '../../../context/HotelProvider';
-import styles from './hotelCreateDialog.module.css';
+import styles from './hotelCreateDialog.module.scss';
 interface HotelCreate {
   formData: any;
   setFormData: any;
@@ -109,10 +108,7 @@ export const HotelCreateDialog = ({
               </div>
             </div>
             <div style={{ alignItems: 'center', textAlign: 'center' }}>
-              <button
-                type="submit"
-                className={`${styles.create_btn}`}
-              >
+              <button type="submit" className={styles.create_btn}>
                 Create
               </button>
             </div>

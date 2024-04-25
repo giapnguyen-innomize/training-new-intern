@@ -33,20 +33,20 @@ export class HotelService {
     const { hotelId, name, descript, image } = hotelData;
     const params: DynamoDB.DocumentClient.PutItemInput = {
       TableName: 'hotel',
-        Item: {
-           hotelId: hotelId,
-            name: name,
-            description: descript,
-            image: image,
-        },
-        ConditionExpression: 'attribute_not_exists(hotelId)',
+      Item: {
+        hotelId: hotelId,
+        name: name,
+        description: descript,
+        image: image,
+      },
+      ConditionExpression: 'attribute_not_exists(hotelId)',
     };
     try {
       await this.dynamoDBClient().put(params).promise();
-      return {message:'Create a hotel success', data:hotelData};
+      return { message: 'Create a hotel success', data: hotelData };
     } catch (error) {
-      console.error(error)
-      return null
+      console.error(error);
+      return null;
     }
   }
   //update hotel item

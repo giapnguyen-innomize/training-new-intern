@@ -21,7 +21,7 @@ input {
 h1 {
   text-align: center;
 }
-.create_btn{
+.create_btn {
   width: 120px;
   height: 50px;
   border: solid 1px;
@@ -29,17 +29,17 @@ h1 {
   cursor: pointer;
   border-radius: 5px;
 }
-.create_btn:hover{
+.create_btn:hover {
   background-color: aquamarine;
 }
-.delete_btn{
- background-color: silver;
+.delete_btn {
+  background-color: silver;
   cursor: pointer;
 }
-.update_btn{
-  background-color: rgb(103, 240, 194) ;
+.update_btn {
+  background-color: rgb(103, 240, 194);
   cursor: pointer;
- }
+}
 table {
   width: 100%;
   border-collapse: collapse;

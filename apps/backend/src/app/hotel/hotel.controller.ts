@@ -35,9 +35,10 @@ export class HotelController {
       return {
         message: `Create Hotel failure! ${error.message}`,
         data: { type: 'error' },
-      };}
+      };
+    }
     const created = await this.hotelService.addHotelData(hotelData);
-    if(created){
+    if (created) {
       return { message: 'create a hotel success', data: hotelData };
     } else {
       return { message: `HotelID must unique`, data: { type: 'error' } };

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { initialState } from '../../../context/HotelProvider';
-import styles from "./hotelUpdateDialog.module.css"
+import styles from './hotelUpdateDialog.module.scss';
 import { toast } from 'react-toastify';
 
 interface HotelUpdate {
@@ -34,7 +34,7 @@ export const HotelUpdateDialog = ({
       )
       .then((data) => {
         setReload(!reload);
-        toast.success("Update hotel success!")
+        toast.success('Update hotel success!');
       })
       .catch((err) => console.error(err));
     setDataUpdate(initialState);
@@ -59,22 +59,16 @@ export const HotelUpdateDialog = ({
     }
   };
   return (
-    <div
-      className={styles.container}
-    >
-      <div
-      className={styles.modal}
-      ><h2>Update Hotel Information</h2>
-        <span
-          className={styles.close_btn}
-          onClick={() => setOpenUpdate(false)}
-        >
+    <div className={styles.container}>
+      <div className={styles.modal}>
+        <h2>Update Hotel Information</h2>
+        <span className={styles.close_btn} onClick={() => setOpenUpdate(false)}>
           &times;
         </span>
-        
+
         <form onSubmit={handleUpdate}>
-          <div >
-            <div className={styles.formGroup} >
+          <div>
+            <div className={styles.formGroup}>
               Hotel Name:
               <input
                 type="text"
@@ -82,7 +76,6 @@ export const HotelUpdateDialog = ({
                 placeholder="Hotel Name"
                 name="name"
                 value={dataUpdate.name}
-                
               />
             </div>
             <div className={styles.formGroup}>
@@ -93,7 +86,6 @@ export const HotelUpdateDialog = ({
                 placeholder="Hotel Id"
                 name="hotelId"
                 value={dataUpdate.hotelId}
-                
               />
             </div>
             <div className={styles.formGroup}>
@@ -129,13 +121,8 @@ export const HotelUpdateDialog = ({
               />
             </div>
           </div>
-          <div
-           style={{ textAlign: 'center' }}
-          >
-            <button
-              type="submit"
-             className={styles.submitButton}
-            >
+          <div style={{ textAlign: 'center' }}>
+            <button type="submit" className={styles.submitButton}>
               Update
             </button>
           </div>
