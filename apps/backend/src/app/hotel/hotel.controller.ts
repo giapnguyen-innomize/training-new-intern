@@ -24,8 +24,7 @@ export class HotelController {
   //Get all hotel table infor
   @Get('hotel')
   async getAll(): Promise<object> {
-    const tableName = 'hotel';
-    return await this.hotelService.getData(tableName);
+    return await this.hotelService.getData('hotel');
   }
   // Create new hotel items
   @Post('hotel')

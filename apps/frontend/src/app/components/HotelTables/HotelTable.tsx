@@ -6,7 +6,8 @@ import { HotelUpdateDialog } from './PopupForms/HotelUpdateDialog';
 import { HotelCreateDialog } from './PopupForms/HotelCreateDialog';
 import { useHotelContext } from '../../context/HotelProvider';
 import { HotelInfo } from 'models';
-const initialState = {
+
+const initialState: HotelInfo = {
   name: '',
   hotelId: '',
   descript: '',
@@ -19,6 +20,7 @@ export function HotelTable() {
   const [formData, setFormData] = useState<HotelInfo>(initialState);
   const [dataUpdate, setDataUpdate] = useState<HotelInfo>(initialState);
   const { hotelInfoList, reload, setReload } = useHotelContext();
+
   const handleDelete = async (item: HotelInfo) => {
     if (!item) return;
     if (window.confirm(`Do you want to delete ${item.name} hotel?`)) {
@@ -30,6 +32,7 @@ export function HotelTable() {
         .catch((err) => console.error(err));
     } else return;
   };
+
   const handleDeleteImage = async (
     publicId: string | undefined,
     item: HotelInfo
@@ -55,9 +58,11 @@ export function HotelTable() {
       }
     }
   };
+
   if (!hotelInfoList) {
     return;
   }
+
   return (
     <div className={styles.container}>
       <button
@@ -84,7 +89,6 @@ export function HotelTable() {
           />
         )}
       </div>
-
       <div>
         {openUpdate && (
           <HotelUpdateDialog
