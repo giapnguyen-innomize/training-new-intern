@@ -53,7 +53,6 @@ export class HotelController {
   ): Promise<ApiResponse> {
     const { error, value } = createHotelSchema.validate(dataUpdate);
     if (error) {
-      console.error(error);
       return {
         message: `Create Hotel failure! ${error.message}`,
         data: { type: 'error' },

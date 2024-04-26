@@ -50,6 +50,7 @@ export class HotelService {
       return { message: 'Create a hotel success', data: hotelData };
     } catch (error) {
       console.error(error);
+      return null;
     }
   }
 

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { initialState } from '../../../context/HotelProvider';
-
+import styles from './hotelCreateDialog.module.scss';
 interface HotelCreate {
   formData: any;
   setFormData: any;
@@ -19,7 +19,10 @@ export const HotelCreateDialog = ({
   setOpenCreate,
 }: HotelCreate) => {
   const [image, setImage] = useState(Object);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7d0c7c567db20115b50543b6fc5761db39acc4a9
   const handleInputCreate = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -33,8 +36,8 @@ export const HotelCreateDialog = ({
       .post('http://localhost:3000/api/hotel', formData)
       .then((data) => {
         data.data.data.type === 'error'
-          ? toast.error(data.data.message)
-          : toast.success(data.data.message);
+        ? toast.error(data.data.message)
+        : toast.success(data.data.message);
         setReload(!reload);
       })
       .catch((err) => console.error(err));
@@ -61,39 +64,10 @@ export const HotelCreateDialog = ({
     }
   };
   return (
-    <div
-      style={{
-        display: 'block',
-        position: 'fixed',
-        zIndex: 1,
-        left: 0,
-        top: 0,
-        width: '100%',
-        height: '100%',
-        overflow: 'auto',
-        backgroundColor: 'rgba(0,0,0,0.4)',
-      }}
-    >
-      <div
-        style={{
-          backgroundColor: '#fefefe',
-          margin: '15% auto',
-          padding: '50px',
-          border: '1px solid #888',
-          width: '80%',
-          display: 'ruby-text',
-          maxWidth: '800px',
-        }}
-      >
+    <div className={styles.container}>
+      <div className={styles.container__modal}>
         <span
-          style={{
-            color: '#aaa',
-            float: 'right',
-            fontSize: '25px',
-            fontWeight: 'bold',
-            cursor: 'pointer',
-            paddingLeft: '5px',
-          }}
+          className={styles.container__closeBtn}
           onClick={() => setOpenCreate(false)}
         >
           &times;
@@ -144,27 +118,8 @@ export const HotelCreateDialog = ({
                 </div>
               </div>
             </div>
-            <div
-              style={{
-                display: 'block',
-                alignItems: 'center',
-                textAlign: 'center',
-                justifyContent: 'center',
-                paddingTop: '20px',
-              }}
-            >
-              <button
-                type="submit"
-                style={{
-                  backgroundColor: '#4CAF50',
-                  color: 'white',
-                  padding: '10px 20px',
-                  border: 'none',
-                  cursor: 'pointer',
-                  borderRadius: '5px',
-                  marginLeft: '10px',
-                }}
-              >
+            <div style={{ alignItems: 'center', textAlign: 'center' }}>
+              <button type="submit" className={styles.container__createBtn}>
                 Create
               </button>
             </div>
