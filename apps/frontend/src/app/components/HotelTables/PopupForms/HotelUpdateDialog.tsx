@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { initialState } from '../../../context/HotelProvider';
 import styles from './hotelUpdateDialog.module.scss';
-
+import { Button,Input } from 'libs/fe/ui/src/lib/ui';
 interface HotelUpdate {
   dataUpdate: any;
   setDataUpdate: any;
@@ -60,18 +60,12 @@ export const HotelUpdateDialog = ({
     <div className={styles.container}>
       <div className={styles.container__modal}>
         <h2>Update Hotel Information</h2>
-        <span
-          className={styles.container__closeBtn}
-          onClick={() => setOpenUpdate(false)}
-        >
-          &times;
-        </span>
-
+        <Button theme='closeDialogCss' onClick={() => setOpenUpdate(false)} >x</Button>
         <form onSubmit={handleUpdate}>
           <div className={styles.container__formGroup}>
             <div>
               Hotel Name:
-              <input
+              <Input
                 type="text"
                 readOnly
                 placeholder="Hotel Name"
@@ -81,7 +75,7 @@ export const HotelUpdateDialog = ({
             </div>
             <div>
               Hotel ID:
-              <input
+              <Input
                 type="text"
                 readOnly
                 placeholder="Hotel Id"
@@ -107,7 +101,7 @@ export const HotelUpdateDialog = ({
               type="file"
               placeholder="Hotel Id"
               name="hotelId"
-              onChange={handleChangeImg}
+              onChange={()=>handleChangeImg}
             />
             <br />
             <div className={styles.container__formGroup}>
@@ -116,16 +110,14 @@ export const HotelUpdateDialog = ({
                 placeholder="Description..."
                 name="descript"
                 value={dataUpdate.descript}
-                onChange={handleInputUpdate}
+                onChange={()=>handleInputUpdate}
                 cols={40}
                 rows={3}
               />
             </div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <button type="submit" className={styles.container__submitButton}>
-              Update
-            </button>
+            <Button theme="submitBtnCss">Update</Button>
           </div>
         </form>
       </div>

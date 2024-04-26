@@ -4,7 +4,9 @@ import axios from 'axios';
 import { HotelUpdateDialog } from './PopupForms/HotelUpdateDialog';
 import { HotelCreateDialog } from './PopupForms/HotelCreateDialog';
 import { useHotelContext } from '../../context/HotelProvider';
-import styles from '../../app.module.css';
+import styles from './hotel.module.scss';
+import { Button
+} from 'libs/fe/ui/src/lib/ui';
 
 const initialState = {
   name: '',
@@ -67,12 +69,10 @@ export function HotelTable() {
   }
   return (
     <div className={styles.container}>
-      <button
-        className={styles.container__createBtn}
+      <Button
         onClick={() => setOpenCreate((pre) => !pre)}
-      >
-        Add new hotel
-      </button>
+        theme='createBtnCss'
+      >Add new hotel</Button>
       <div>
         {openCreate && (
           <HotelCreateDialog
@@ -127,25 +127,19 @@ export function HotelTable() {
                 <img src={item?.image?.secureUrl}></img>
               </td>
               <td>
-                <button
-                  className={styles.container__updateBtn}
+                <Button
                   onClick={() => {
                     setDataUpdate(item);
                     setOpenUpdate(true);
                   }}
-                >
-                  update
-                </button>
+                  theme='updateBtnCss'
+                >Update</Button>
               </td>
               <td>
-                <button
-                  className={styles.containter__deleteBtn}
-                  onClick={() => {
-                    handleDelete(item);
-                  }}
-                >
-                  delete
-                </button>
+                <Button
+                  onClick={() => handleDelete(item)}
+                 theme='deleteBtnCss'
+                >Delete</Button>
               </td>
             </tr>
           </tbody>

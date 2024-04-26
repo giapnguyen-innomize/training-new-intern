@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { initialState } from '../../../context/HotelProvider';
 import styles from './hotelCreateDialog.module.scss';
+import { Button, Input } from 'libs/fe/ui/src/lib/ui';
 interface HotelCreate {
   formData: any;
   setFormData: any;
@@ -30,8 +31,8 @@ export const HotelCreateDialog = ({
       .post('http://localhost:3000/api/hotel', formData)
       .then((data) => {
         data.data.data.type === 'error'
-        ? toast.error(data.data.message)
-        : toast.success(data.data.message);
+          ? toast.error(data.data.message)
+          : toast.success(data.data.message);
         setReload(!reload);
       })
       .catch((err) => console.error(err));
@@ -56,65 +57,55 @@ export const HotelCreateDialog = ({
       console.error('Error uploading image:', error);
     }
   };
+  console.log({formData})
   return (
     <div className={styles.container}>
       <div className={styles.container__modal}>
-        <span
-          className={styles.container__closeBtn}
-          onClick={() => setOpenCreate(false)}
-        >
-          &times;
-        </span>
+        <Button theme='closeDialogCss' onClick={() => setOpenCreate(false)} >x</Button>
         <div>
           <h2>Create Hotel Information</h2>
           <form onSubmit={handleCreate}>
             <div style={{ display: 'block', padding: '10px' }}>
+              <div style={{ paddingBottom: '10px' }}>
+                Name:<br/>
+                <Input
+                  required
+                  type="text"
+                  placeholder="Hotel Name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputCreate}
+                />
+              </div>
               <div>
-                <div style={{ paddingBottom: '10px' }}>
-                  Name:
-                  <input
-                    required
-                    style={{ display: 'block' }}
-                    type="text"
-                    placeholder="Hotel Name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputCreate}
-                  />
-                </div>
-                <div>
-                  Hotel ID:
-                  <input
-                    required
-                    style={{ display: 'block' }}
-                    type="text"
-                    placeholder="Hotel Id"
-                    name="hotelId"
-                    value={formData.hotelId}
-                    onChange={handleInputCreate}
-                  />
-                </div>
+                Hotel ID:
+                <Input
+                  required
+                  type="text"
+                  placeholder="Hotel Id"
+                  name="hotelId"
+                  value={formData.hotelId}
+                  onChange={handleInputCreate}
+                />
+              </div>
+              <br />
+              Hotel's Image: <br />
+              <img src={image && image.secureUrl} />
+              <input type="file" name="image" onChange={handleChangeImg} />
+              <div style={{ paddingTop: '10px' }}>
+                Description:
                 <br />
-                Hotel's Image: <br />
-                <img src={image && image.secureUrl} />
-                <input type="file" name="image" onChange={handleChangeImg} />
-                <div style={{ paddingTop: '10px' }}>
-                  Description:
-                  <br />
-                  <textarea
-                    name="descript"
-                    placeholder="Description..."
-                    value={formData.descript}
-                    onChange={handleInputCreate}
-                    cols={45}
-                  ></textarea>
-                </div>
+                <textarea
+                  name="descript"
+                  placeholder="Description..."
+                  value={formData.descript}
+                  onChange={handleInputCreate}
+                  cols={45}
+                ></textarea>
               </div>
             </div>
             <div style={{ alignItems: 'center', textAlign: 'center' }}>
-              <button type="submit" className={styles.container__createBtn}>
-                Create
-              </button>
+              <Button theme="submitBtnCss">Create</Button>
             </div>
           </form>
         </div>
