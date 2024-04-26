@@ -1,11 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useState } from 'react';
 import axios from 'axios';
-import styles from '../../app.module.css';
 import { HotelUpdateDialog } from './PopupForms/HotelUpdateDialog';
 import { HotelCreateDialog } from './PopupForms/HotelCreateDialog';
 import { useHotelContext } from '../../context/HotelProvider';
 import { HotelInfo } from 'models';
+import styles from '../../app.module.css';
+
 const initialState = {
   name: '',
   hotelId: '',
@@ -61,14 +62,7 @@ export function HotelTable() {
   return (
     <div className={styles.container}>
       <button
-        style={{
-          width: '120px',
-          height: '50px',
-          border: 'solid 1px',
-          backgroundColor: '#f2f2f2',
-          cursor: 'pointer',
-          borderRadius: '5px',
-        }}
+        className={styles.container__createBtn}
         onClick={() => setOpenCreate((pre) => !pre)}
       >
         Add new hotel
@@ -97,7 +91,7 @@ export function HotelTable() {
         )}
       </div>
       <h1 className={styles.h1}>Hotel Information</h1>
-      <table className={styles.table}>
+      <table className={styles.container__table}>
         <thead>
           <tr>
             <th>Hotel Id</th>
@@ -117,22 +111,18 @@ export function HotelTable() {
               <td>
                 {item?.image?.secureUrl && (
                   <button
-                    style={{
-                      marginLeft: '240px',
-                      backgroundColor: 'smoke',
-                      cursor: 'pointer',
-                    }}
-                    onClick={() =>
-                      handleDeleteImage(item.image?.publicId, item)
-                    }
+                    className={styles.container__deleteBtn}
+                    style={{ marginLeft: '275px' }}
+                    onClick={() => handleDeleteImage(item.image.publicId, item)}
                   >
-                    delete
+                    x
                   </button>
                 )}
                 <img src={item?.image?.secureUrl} alt=""></img>
               </td>
               <td>
                 <button
+                  className={styles.container__updateBtn}
                   onClick={() => {
                     setDataUpdate(item);
                     setOpenUpdate(true);
@@ -143,6 +133,7 @@ export function HotelTable() {
               </td>
               <td>
                 <button
+                  className={styles.containter__deleteBtn}
                   onClick={() => {
                     handleDelete(item);
                   }}
