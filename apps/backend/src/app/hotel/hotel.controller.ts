@@ -38,7 +38,7 @@ export class HotelController {
       };
     }
     const created = await this.hotelService.addHotelData(hotelData);
-    if(created){
+    if (created) {
       return { message: 'create a hotel success', data: hotelData };
     } else {
       return { message: `HotelID must unique`, data: { type: 'error' } };
@@ -53,7 +53,6 @@ export class HotelController {
   ): Promise<ApiResponse> {
     const { error, value } = createHotelSchema.validate(dataUpdate);
     if (error) {
-      console.error(error);
       return {
         message: `Create Hotel failure! ${error.message}`,
         data: { type: 'error' },
