@@ -23,21 +23,24 @@ export const HotelCreateDialog = ({
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
   const handleCreate = async (e: any) => {
     e.preventDefault();
     formData = { ...formData, image };
+
     await axios
       .post('http://localhost:3000/api/hotel', formData)
       .then((data) => {
         data.data.data.type === 'error'
-        ? toast.error(data.data.message)
-        : toast.success(data.data.message);
+          ? toast.error(data.data.message)
+          : toast.success(data.data.message);
         setReload(!reload);
       })
       .catch((err) => console.error(err));
     setFormData(initialState);
     setOpenCreate(false);
   };
+
   const handleChangeImg = async (e: any) => {
     const img = e.target.files[0];
     setImage(img);
