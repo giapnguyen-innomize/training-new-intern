@@ -21,7 +21,7 @@ export function HotelTable() {
   const [formData, setFormData] = useState<HotelInfo>(initialState);
   const [dataUpdate, setDataUpdate] = useState<HotelInfo>(initialState);
   const { hotelInfoList, reload, setReload } = useHotelContext();
-  
+
   const handleDelete = async (item: HotelInfo) => {
     if (!item) return;
     if (window.confirm(`Do you want to delete ${item.name} hotel?`)) {

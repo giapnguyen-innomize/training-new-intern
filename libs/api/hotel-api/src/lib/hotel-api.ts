@@ -11,6 +11,7 @@ export const createHotel = async (formData: HotelInfo) => {
     throw 'Error in creating hotel: ' + error;
   }
 };
+
 export const getAllHotels = async () => {
   try {
     const response = await axios.get(`${localHostUrl}/api/hotel`);
