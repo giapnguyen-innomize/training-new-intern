@@ -39,7 +39,7 @@ export class HotelService {
       Item: {
         hotelId,
         name,
-        description: descript,
+        descript,
         image,
       },
       ConditionExpression: 'attribute_not_exists(hotelId)',

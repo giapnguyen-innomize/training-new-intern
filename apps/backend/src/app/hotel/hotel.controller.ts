@@ -54,7 +54,7 @@ export class HotelController {
     @Param('name') name: string,
     @Body() dataUpdate: HotelInfo
   ): Promise<ApiResponse> {
-    const { error, value } = createHotelSchema.validate(dataUpdate);
+    const { error } = createHotelSchema.validate(dataUpdate);
     if (error) {
       return {
         message: `Create Hotel failure! ${error.message}`,

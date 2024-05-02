@@ -1,12 +1,13 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { createHotel, uploadImage } from 'hotel-api';
 import { initialState } from '../../../context/HotelProvider';
+import { HotelInfo } from 'models';
 import styles from './hotelCreateDialog.module.scss';
 import { Button, InputForm } from 'ui';
 
 interface HotelCreate {
-  formData: any;
+  formData: HotelInfo;
   setFormData: any;
   reload: boolean;
   setReload: any;
@@ -25,41 +26,29 @@ export const HotelCreateDialog = ({
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
-  const handleCreate = async (e: any) => {
+  const handleCreate = (e: any) => {
     e.preventDefault();
     formData = { ...formData, image };
-
-    await axios
-      .post('http://localhost:3000/api/hotel', formData)
+    createHotel(formData)
       .then((data) => {
-        data.data.data.type === 'error'
+        setReload(!reload);
+        data.data.type === 'error'
           ? toast.error(data.data.message)
           : toast.success(data.data.message);
-        setReload(!reload);
       })
       .catch((err) => console.error(err));
     setFormData(initialState);
     setOpenCreate(false);
   };
 
-  const handleChangeImg = async (e: any) => {
+  const handleChangeImg = (e: any) => {
     const img = e.target.files[0];
     setImage(img);
     const imgForm = new FormData();
     imgForm.append('image', img);
-    try {
-      const response = await axios.post(
-        'http://localhost:3000/api/upload',
-        imgForm,
-        {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        }
-      );
-      setImage(response.data.imageUrl);
-    } catch (error) {
-      console.error('Error uploading image:', error);
-    }
+    uploadImage(imgForm)
+      .then((data) => setImage(data.imageUrl))
+      .catch((error) => console.error('Error uploading image:', error));
   };
   return (
     <div className={styles.container}>
