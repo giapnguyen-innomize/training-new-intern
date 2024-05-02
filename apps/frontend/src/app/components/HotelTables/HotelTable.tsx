@@ -30,7 +30,7 @@ export function HotelTable() {
           toast.success(data.message);
           setReload(!reload);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.error(err));
     }
   };
   const handleDeleteImage = (publicId: string, item: HotelInfo) => {
