@@ -21,11 +21,13 @@ export class HotelController {
     private readonly hotelService: HotelService,
     private readonly cloudinaryService: CloudinaryService
   ) {}
+
   //Get all hotel table infor
   @Get('hotel')
   async getAll(): Promise<object> {
     return await this.hotelService.getData('hotel');
   }
+
   // Create new hotel items
   @Post('hotel')
   async createHotel(@Body() hotelData: HotelInfo): Promise<ApiResponse> {
@@ -44,6 +46,7 @@ export class HotelController {
       return { message: `HotelID must unique`, data: { type: 'error' } };
     }
   }
+
   //Update hotel
   @Put(':hotelId/:name')
   async updateHotel(
@@ -65,6 +68,7 @@ export class HotelController {
     );
     return { message: 'Hotel item update successfully', data: updated };
   }
+
   //Upload Image
   @Post('upload')
   @UseInterceptors(FileInterceptor('image'))
@@ -72,6 +76,7 @@ export class HotelController {
     const imageUrl = await this.cloudinaryService.uploadImage(image);
     return { imageUrl };
   }
+
   //Delete Image
   @Post('delete/image')
   async deleteImage(@Body() publicId: string): Promise<ApiResponse> {
@@ -82,6 +87,7 @@ export class HotelController {
       throw new Error('Error deleting image: ' + error.message);
     }
   }
+  
   // Delete hotel item
   @Delete(':hotelId/:name')
   async deleteHotel(

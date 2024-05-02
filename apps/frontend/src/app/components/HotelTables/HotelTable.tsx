@@ -5,14 +5,9 @@ import { HotelUpdateDialog } from './PopupForms/HotelUpdateDialog';
 import { HotelCreateDialog } from './PopupForms/HotelCreateDialog';
 import { useHotelContext } from '../../context/HotelProvider';
 import { HotelInfo } from 'models';
-<<<<<<< HEAD
-
-const initialState: HotelInfo = {
-=======
 import styles from '../../app.module.css';
 
-const initialState = {
->>>>>>> 7d0c7c567db20115b50543b6fc5761db39acc4a9
+const initialState: HotelInfo = {
   name: '',
   hotelId: '',
   descript: '',
@@ -121,7 +116,9 @@ export function HotelTable() {
                   <button
                     className={styles.container__deleteBtn}
                     style={{ marginLeft: '275px' }}
-                    onClick={() => handleDeleteImage(item.image.publicId, item)}
+                    onClick={() =>
+                      handleDeleteImage(item.image?.publicId, item)
+                    }
                   >
                     x
                   </button>

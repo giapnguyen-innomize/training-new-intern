@@ -19,10 +19,6 @@ export const HotelCreateDialog = ({
   setOpenCreate,
 }: HotelCreate) => {
   const [image, setImage] = useState(Object);
-<<<<<<< HEAD
-
-=======
->>>>>>> 7d0c7c567db20115b50543b6fc5761db39acc4a9
   const handleInputCreate = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -36,8 +32,8 @@ export const HotelCreateDialog = ({
       .post('http://localhost:3000/api/hotel', formData)
       .then((data) => {
         data.data.data.type === 'error'
-        ? toast.error(data.data.message)
-        : toast.success(data.data.message);
+          ? toast.error(data.data.message)
+          : toast.success(data.data.message);
         setReload(!reload);
       })
       .catch((err) => console.error(err));

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { v2 as cloudinary } from 'cloudinary';
 import { ConfigService } from '@nestjs/config';
 import { Image } from 'models';
+
 @Injectable()
 export class CloudinaryService {
   constructor(private readonly configService: ConfigService) {
