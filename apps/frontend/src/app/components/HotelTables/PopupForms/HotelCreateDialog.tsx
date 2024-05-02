@@ -29,6 +29,7 @@ export const HotelCreateDialog = ({
   const handleCreate = async (e: any) => {
     e.preventDefault();
     formData = { ...formData, image };
+
     await axios
       .post('http://localhost:3000/api/hotel', formData)
       .then((data) => {
@@ -41,6 +42,7 @@ export const HotelCreateDialog = ({
     setFormData(initialState);
     setOpenCreate(false);
   };
+
   const handleChangeImg = async (e: any) => {
     const img = e.target.files[0];
     setImage(img);
@@ -71,7 +73,6 @@ export const HotelCreateDialog = ({
             <div>
               <InputForm
                 required
-                type="text"
                 placeholder="Hotel Name"
                 name="name"
                 value={formData.name}
@@ -82,7 +83,6 @@ export const HotelCreateDialog = ({
 
               <InputForm
                 required
-                type="text"
                 placeholder="Hotel Id"
                 name="hotelId"
                 value={formData.hotelId}

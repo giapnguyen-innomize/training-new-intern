@@ -6,17 +6,8 @@ import React, {
   ReactNode,
   useEffect,
 } from 'react';
+import { HotelInfo } from 'models';
 
-interface Image {
-  secureUrl: string;
-  publicId: string;
-}
-interface HotelInfo {
-  name: string;
-  hotelId: string;
-  descript: string;
-  image: Image;
-}
 interface HotelContextType {
   hotelInfoList: HotelInfo[];
   setHotelInfoList: (info: HotelInfo[]) => void;

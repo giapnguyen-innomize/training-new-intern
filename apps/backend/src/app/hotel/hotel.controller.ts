@@ -13,6 +13,7 @@ import { HotelService } from './hotel.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
 import { createHotelSchema } from '../validate/validateCreateHotelForm';
+import { HotelInfo } from 'models';
 
 @Controller()
 export class HotelController {
@@ -24,14 +25,13 @@ export class HotelController {
   //Get all hotel table infor
   @Get('hotel')
   async getAll(): Promise<object> {
-    const tableName = 'hotel';
-    return await this.hotelService.getData(tableName);
+    return await this.hotelService.getData('hotel');
   }
 
   // Create new hotel items
   @Post('hotel')
-  async createHotel(@Body() hotelData: Hotel): Promise<ApiResponse> {
-    const { error, value } = createHotelSchema.validate(hotelData);
+  async createHotel(@Body() hotelData: HotelInfo): Promise<ApiResponse> {
+    const { error } = createHotelSchema.validate(hotelData);
     if (error) {
       console.error(error);
       return {
@@ -52,7 +52,7 @@ export class HotelController {
   async updateHotel(
     @Param('hotelId') hotelId: string,
     @Param('name') name: string,
-    @Body() dataUpdate: Hotel
+    @Body() dataUpdate: HotelInfo
   ): Promise<ApiResponse> {
     const { error, value } = createHotelSchema.validate(dataUpdate);
     if (error) {

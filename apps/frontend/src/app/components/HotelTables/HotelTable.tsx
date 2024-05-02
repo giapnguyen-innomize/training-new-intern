@@ -6,31 +6,23 @@ import { HotelCreateDialog } from './PopupForms/HotelCreateDialog';
 import { useHotelContext } from '../../context/HotelProvider';
 import styles from './hotel.module.scss';
 import { Button } from 'libs/fe/ui/src/lib/ui';
+import { HotelInfo } from 'models';
 
-const initialState = {
+const initialState: HotelInfo = {
   name: '',
   hotelId: '',
   descript: '',
-  image: {},
+  image: { secureUrl: '', publicId: '' },
 };
-interface Image {
-  secureUrl: string;
-  publicId: string;
-}
-interface Item {
-  name: string;
-  hotelId: string;
-  descript?: string;
-  image?: Image;
-}
 
 export function HotelTable() {
   const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [openUpdate, setOpenUpdate] = useState<boolean>(false);
-  const [formData, setFormData] = useState(initialState);
-  const [dataUpdate, setDataUpdate] = useState(initialState);
+  const [formData, setFormData] = useState<HotelInfo>(initialState);
+  const [dataUpdate, setDataUpdate] = useState<HotelInfo>(initialState);
   const { hotelInfoList, reload, setReload } = useHotelContext();
-  const handleDelete = async (item: any) => {
+
+  const handleDelete = async (item: HotelInfo) => {
     if (!item) return;
     if (window.confirm(`Do you want to delete ${item.name} hotel?`)) {
       await axios
@@ -41,11 +33,15 @@ export function HotelTable() {
         .catch((err) => console.error(err));
     } else return;
   };
-  const handleDeleteImage = async (publicId: string, item: Item) => {
+
+  const handleDeleteImage = async (
+    publicId: string | undefined,
+    item: HotelInfo
+  ) => {
     if (window.confirm('Do you want delete this image')) {
       const { image, ...dataUpdate } = item;
       try {
-        const res = await axios.post(`http://localhost:3000/api/delete/image`, {
+        await axios.post(`http://localhost:3000/api/delete/image`, {
           publicId,
         });
         await axios
@@ -67,7 +63,7 @@ export function HotelTable() {
   if (!hotelInfoList) {
     return;
   }
-  
+
   return (
     <div className={styles.container}>
       <Button onClick={() => setOpenCreate((pre) => !pre)} theme="createBtnCss">
@@ -84,7 +80,6 @@ export function HotelTable() {
           />
         )}
       </div>
-
       <div>
         {openUpdate && (
           <HotelUpdateDialog
@@ -119,12 +114,14 @@ export function HotelTable() {
                   <button
                     className={styles.container__deleteBtn}
                     style={{ marginLeft: '275px' }}
-                    onClick={() => handleDeleteImage(item.image.publicId, item)}
+                    onClick={() =>
+                      handleDeleteImage(item.image?.publicId, item)
+                    }
                   >
                     x
                   </button>
                 )}
-                <img src={item?.image?.secureUrl}></img>
+                <img src={item?.image?.secureUrl} alt=""></img>
               </td>
               <td>
                 <Button

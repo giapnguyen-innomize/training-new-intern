@@ -17,7 +17,6 @@ const BUTTON_THEME = {
 
 interface InputProps {
   children?: React.ReactNode;
-  type?: string;
   required?: boolean;
   readOnly?: boolean;
   placeholder?: string;
@@ -42,7 +41,6 @@ const Button: React.FC<ButtonProps> = ({
 const InputForm: React.FC<InputProps> = ({
   children,
   onChange,
-  type = 'text',
   required = false,
   readOnly = false,
   placeholder,
@@ -54,7 +52,7 @@ const InputForm: React.FC<InputProps> = ({
       {children}
       <input
         onChange={onChange}
-        type={type}
+        type="text"
         required={required}
         readOnly={readOnly}
         placeholder={placeholder}

@@ -63,6 +63,7 @@ export const HotelUpdateDialog = ({
         <Button theme="closeDialogCss" onClick={() => setOpenUpdate(false)}>
           x
         </Button>
+
         <form onSubmit={handleUpdate}>
           <div className={styles.container__formGroup}>
             <InputForm>Hotel Name:</InputForm>

@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "models": ["libs/data-access/models/src/index.ts"],
       "ui": ["libs/fe/ui/src/index.ts"]
     }
   },
