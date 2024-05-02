@@ -89,7 +89,6 @@ export class HotelService {
         name: hotelName,
       },
     };
-
     try {
       await this.dynamoDBClient().delete(params).promise();
       return { message: hotelId, data: { hotelName } };

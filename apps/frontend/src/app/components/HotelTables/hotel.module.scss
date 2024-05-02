@@ -19,25 +19,6 @@ body {
   h1 {
     text-align: center;
   }
-  &__createBtn {
-    width: 120px;
-    height: 50px;
-    border: solid 1px;
-    background-color: #f2f2f2;
-    cursor: pointer;
-    border-radius: 5px;
-    &:hover {
-      background-color: aquamarine;
-    }
-  }
-  &__deleteBtn {
-    background-color: silver;
-    cursor: pointer;
-  }
-  &__updateBtn {
-    background-color: rgb(103, 240, 194);
-    cursor: pointer;
-  }
   &__table {
     width: 100%;
     border-collapse: collapse;
