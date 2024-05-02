@@ -12,4 +12,5 @@ import cloudinaryConfig from '../cloudinary/cloudinary.config';
   controllers: [HotelController],
   providers: [HotelService, CloudinaryService, ConfigService],
 })
+
 export class HotelModule {}

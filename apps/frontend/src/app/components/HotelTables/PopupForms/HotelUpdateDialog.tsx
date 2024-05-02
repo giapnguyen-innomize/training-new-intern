@@ -66,7 +66,6 @@ export const HotelUpdateDialog = ({
         >
           &times;
         </span>
-
         <form onSubmit={handleUpdate}>
           <div className={styles.container__formGroup}>
             <div>
