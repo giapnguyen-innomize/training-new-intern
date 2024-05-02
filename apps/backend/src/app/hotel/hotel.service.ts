@@ -39,7 +39,7 @@ export class HotelService {
       Item: {
         hotelId,
         name,
-        description: descript,
+        descript,
         image,
       },
       ConditionExpression: 'attribute_not_exists(hotelId)',
@@ -89,7 +89,6 @@ export class HotelService {
         name: hotelName,
       },
     };
-
     try {
       await this.dynamoDBClient().delete(params).promise();
       return { message: hotelId, data: { hotelName } };

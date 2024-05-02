@@ -1,10 +1,12 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { initialState } from '../../../context/HotelProvider';
 import styles from './hotelUpdateDialog.module.scss';
+import { updateHotel, uploadImage } from 'hotel-api';
+import { HotelInfo } from 'models';
+import { toast } from 'react-toastify';
 
 interface HotelUpdate {
-  dataUpdate: any;
+  dataUpdate: HotelInfo;
   setDataUpdate: any;
   reload: boolean;
   setReload: any;
@@ -25,13 +27,12 @@ export const HotelUpdateDialog = ({
   };
   const handleUpdate = async (e: any) => {
     e.preventDefault();
-    dataUpdate.image = image;
-    await axios
-      .put(
-        `http://localhost:3000/api/${dataUpdate.hotelId}/${dataUpdate.name}`,
-        dataUpdate
-      )
+    if (image.length > 0) {
+      dataUpdate.image = image;
+    }
+    updateHotel(dataUpdate.hotelId, dataUpdate.name, dataUpdate)
       .then((data) => {
+        toast.success(data.message);
         setReload(!reload);
       })
       .catch((err) => console.error(err));
@@ -43,18 +44,9 @@ export const HotelUpdateDialog = ({
     setImage(img);
     const imgForm = new FormData();
     imgForm.append('image', img);
-    try {
-      const response = await axios.post(
-        'http://localhost:3000/api/upload',
-        imgForm,
-        {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        }
-      );
-      setImage(response.data.imageUrl);
-    } catch (error) {
-      console.error('Error uploading image:', error);
-    }
+    uploadImage(imgForm)
+      .then((data) => setImage(data.imageUrl))
+      .catch((err) => console.error(err));
   };
   return (
     <div className={styles.container}>

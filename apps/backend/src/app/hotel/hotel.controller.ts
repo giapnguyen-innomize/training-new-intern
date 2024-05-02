@@ -31,7 +31,7 @@ export class HotelController {
   // Create new hotel items
   @Post('hotel')
   async createHotel(@Body() hotelData: HotelInfo): Promise<ApiResponse> {
-    const { error, value } = createHotelSchema.validate(hotelData);
+    const { error } = createHotelSchema.validate(hotelData);
     if (error) {
       console.error(error);
       return {
@@ -54,7 +54,7 @@ export class HotelController {
     @Param('name') name: string,
     @Body() dataUpdate: HotelInfo
   ): Promise<ApiResponse> {
-    const { error, value } = createHotelSchema.validate(dataUpdate);
+    const { error } = createHotelSchema.validate(dataUpdate);
     if (error) {
       return {
         message: `Create Hotel failure! ${error.message}`,
@@ -87,7 +87,7 @@ export class HotelController {
       throw new Error('Error deleting image: ' + error.message);
     }
   }
-  
+
   // Delete hotel item
   @Delete(':hotelId/:name')
   async deleteHotel(

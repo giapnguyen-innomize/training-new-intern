@@ -1,11 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useState } from 'react';
-import axios from 'axios';
 import { HotelUpdateDialog } from './PopupForms/HotelUpdateDialog';
 import { HotelCreateDialog } from './PopupForms/HotelCreateDialog';
 import { useHotelContext } from '../../context/HotelProvider';
 import { HotelInfo } from 'models';
-import styles from '../../app.module.css';
+import { deleteHotel, deleteImage } from 'hotel-api';
+import styles from './hotel.module.scss';
+import { toast } from 'react-toastify';
 
 const initialState: HotelInfo = {
   name: '',
@@ -20,42 +21,25 @@ export function HotelTable() {
   const [formData, setFormData] = useState<HotelInfo>(initialState);
   const [dataUpdate, setDataUpdate] = useState<HotelInfo>(initialState);
   const { hotelInfoList, reload, setReload } = useHotelContext();
-
+  
   const handleDelete = async (item: HotelInfo) => {
     if (!item) return;
     if (window.confirm(`Do you want to delete ${item.name} hotel?`)) {
-      await axios
-        .delete(`http://localhost:3000/api/${item.hotelId}/${item.name}`)
+      deleteHotel(item.name, item.hotelId)
         .then((data) => {
+          toast.success(data.message);
           setReload(!reload);
         })
-        .catch((err) => console.error(err));
-    } else return;
+        .catch((err) => console.log(err));
+    }
   };
-
-  const handleDeleteImage = async (
-    publicId: string | undefined,
-    item: HotelInfo
-  ) => {
+  const handleDeleteImage = (publicId: string, item: HotelInfo) => {
     if (window.confirm('Do you want delete this image')) {
       const { image, ...dataUpdate } = item;
-      try {
-        await axios.post(`http://localhost:3000/api/delete/image`, {
-          publicId,
-        });
-        await axios
-          .put(
-            `http://localhost:3000/api/${dataUpdate.hotelId}/${dataUpdate.name}`,
-            dataUpdate
-          )
-          .then((data) => {
-            setReload(!reload);
-          })
-          .catch((err) => console.error(err));
-        setReload(!reload);
-      } catch (error) {
-        console.error(error);
-      }
+      deleteImage(publicId, dataUpdate).catch((err) =>
+        console.error('Delete image error:', err)
+      );
+      setReload(!reload);
     }
   };
 
@@ -105,6 +89,7 @@ export function HotelTable() {
             <th>Delete</th>
           </tr>
         </thead>
+
         {hotelInfoList.map((item, index) => (
           <tbody key={index}>
             <tr>
@@ -117,6 +102,7 @@ export function HotelTable() {
                     className={styles.container__deleteBtn}
                     style={{ marginLeft: '275px' }}
                     onClick={() =>
+                      item.image &&
                       handleDeleteImage(item.image?.publicId, item)
                     }
                   >
