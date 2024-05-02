@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { initialState } from '../../../context/HotelProvider';
 import styles from './hotelCreateDialog.module.scss';
-import { Button, InputForm } from 'libs/fe/ui/src/lib/ui';
+import { Button, InputForm } from 'ui';
 
 interface HotelCreate {
   formData: any;
@@ -64,7 +64,7 @@ export const HotelCreateDialog = ({
   return (
     <div className={styles.container}>
       <div className={styles.container__modal}>
-        <Button theme="closeDialogCss" onClick={() => setOpenCreate(false)}>
+        <Button theme="closeDialog" onClick={() => setOpenCreate(false)}>
           x
         </Button>
         <div>
@@ -72,24 +72,21 @@ export const HotelCreateDialog = ({
           <form onSubmit={handleCreate}>
             <div>
               <InputForm
+                label="Name:"
                 required
                 placeholder="Hotel Name"
                 name="name"
                 value={formData.name}
                 onChange={handleInputCreate}
-              >
-                Name:
-              </InputForm>
-
+              />
               <InputForm
+                label="Hotel ID:"
                 required
                 placeholder="Hotel Id"
                 name="hotelId"
                 value={formData.hotelId}
                 onChange={handleInputCreate}
-              >
-                Hotel ID:
-              </InputForm>
+              />
 
               <div>
                 Hotel's Image:
@@ -109,7 +106,7 @@ export const HotelCreateDialog = ({
               </div>
             </div>
             <div>
-              <Button theme="submitBtnCss">Create</Button>
+              <Button theme="submit">Create</Button>
             </div>
           </form>
         </div>

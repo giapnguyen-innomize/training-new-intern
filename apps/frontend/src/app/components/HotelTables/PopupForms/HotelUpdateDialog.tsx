@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { initialState } from '../../../context/HotelProvider';
 import styles from './hotelUpdateDialog.module.scss';
-import { Button, InputForm } from 'libs/fe/ui/src/lib/ui';
+import { Button, InputForm } from 'ui';
 interface HotelUpdate {
   dataUpdate: any;
   setDataUpdate: any;
@@ -60,14 +60,23 @@ export const HotelUpdateDialog = ({
     <div className={styles.container}>
       <div className={styles.container__modal}>
         <h2>Update Hotel Information</h2>
-        <Button theme="closeDialogCss" onClick={() => setOpenUpdate(false)}>
+        <Button theme="closeDialog" onClick={() => setOpenUpdate(false)}>
           x
         </Button>
-
         <form onSubmit={handleUpdate}>
           <div className={styles.container__formGroup}>
-            <InputForm>Hotel Name:</InputForm>
-            <InputForm>Hotel Id:</InputForm>
+            <InputForm
+              label="Hotel Name: "
+              value={dataUpdate.name}
+              name="name"
+              readOnly
+            />
+            <InputForm
+              label="Hotel Id: "
+              value={dataUpdate.hotelId}
+              name="hotelId"
+              readOnly
+            />
             <div>
               Hotel Image:
               <div>
@@ -102,7 +111,7 @@ export const HotelUpdateDialog = ({
             </div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <Button theme="submitBtnCss">Update</Button>
+            <Button theme="submit">Update</Button>
           </div>
         </form>
       </div>

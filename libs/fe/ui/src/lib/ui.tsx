@@ -8,15 +8,15 @@ interface ButtonProps {
 }
 
 const BUTTON_THEME = {
-  submitBtnCss: styles.submitBtn,
-  deleteBtnCss: styles.deleteBtn,
-  updateBtnCss: styles.updateBtn,
-  createBtnCss: styles.createBtn,
-  closeDialogCss: styles.closeDialogBtn,
+  submit: styles.submitBtn,
+  delete: styles.deleteBtn,
+  update: styles.updateBtn,
+  create: styles.createBtn,
+  closeDialog: styles.closeDialogBtn,
 };
 
 interface InputProps {
-  children?: React.ReactNode;
+  label: string;
   required?: boolean;
   readOnly?: boolean;
   placeholder?: string;
@@ -39,7 +39,7 @@ const Button: React.FC<ButtonProps> = ({
 };
 
 const InputForm: React.FC<InputProps> = ({
-  children,
+  label,
   onChange,
   required = false,
   readOnly = false,
@@ -49,7 +49,7 @@ const InputForm: React.FC<InputProps> = ({
 }) => {
   return (
     <div>
-      {children}
+      {label}
       <input
         onChange={onChange}
         type="text"
