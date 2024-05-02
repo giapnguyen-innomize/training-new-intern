@@ -4,6 +4,7 @@ import { createHotel, uploadImage } from 'hotel-api';
 import { initialState } from '../../../context/HotelProvider';
 import { HotelInfo } from 'models';
 import styles from './hotelCreateDialog.module.scss';
+import { Button, InputForm } from 'ui';
 
 interface HotelCreate {
   formData: HotelInfo;
@@ -52,62 +53,49 @@ export const HotelCreateDialog = ({
   return (
     <div className={styles.container}>
       <div className={styles.container__modal}>
-        <span
-          className={styles.container__closeBtn}
-          onClick={() => setOpenCreate(false)}
-        >
-          &times;
-        </span>
+        <Button theme="closeDialog" onClick={() => setOpenCreate(false)}>
+          x
+        </Button>
         <div>
           <h2>Create Hotel Information</h2>
           <form onSubmit={handleCreate}>
-            <div style={{ display: 'block', padding: '10px' }}>
+            <div>
+              <InputForm
+                label="Name:"
+                required
+                placeholder="Hotel Name"
+                name="name"
+                value={formData.name}
+                onChange={handleInputCreate}
+              />
+              <InputForm
+                label="Hotel ID:"
+                required
+                placeholder="Hotel Id"
+                name="hotelId"
+                value={formData.hotelId}
+                onChange={handleInputCreate}
+              />
+
               <div>
-                <div style={{ paddingBottom: '10px' }}>
-                  Name:
-                  <input
-                    required
-                    style={{ display: 'block' }}
-                    type="text"
-                    placeholder="Hotel Name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputCreate}
-                  />
-                </div>
-                <div>
-                  Hotel ID:
-                  <input
-                    required
-                    style={{ display: 'block' }}
-                    type="text"
-                    placeholder="Hotel Id"
-                    name="hotelId"
-                    value={formData.hotelId}
-                    onChange={handleInputCreate}
-                  />
-                </div>
-                <br />
-                Hotel's Image: <br />
+                Hotel's Image:
                 <img src={image && image.secureUrl} />
                 <input type="file" name="image" onChange={handleChangeImg} />
-                <div style={{ paddingTop: '10px' }}>
-                  Description:
-                  <br />
-                  <textarea
-                    name="descript"
-                    placeholder="Description..."
-                    value={formData.descript}
-                    onChange={handleInputCreate}
-                    cols={45}
-                  ></textarea>
-                </div>
+              </div>
+              <div>
+                Description:
+                <br />
+                <textarea
+                  name="descript"
+                  placeholder="Description..."
+                  value={formData.descript}
+                  onChange={handleInputCreate}
+                  cols={45}
+                ></textarea>
               </div>
             </div>
-            <div style={{ alignItems: 'center', textAlign: 'center' }}>
-              <button type="submit" className={styles.container__createBtn}>
-                Create
-              </button>
+            <div>
+              <Button theme="submit">Create</Button>
             </div>
           </form>
         </div>

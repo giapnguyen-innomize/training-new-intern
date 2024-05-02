@@ -1,0 +1,43 @@
+.createBtn {
+  width: 120px;
+  height: 50px;
+  border: solid 1px;
+  background-color: #f2f2f2;
+  cursor: pointer;
+  border-radius: 5px;
+  &:hover {
+    background-color: aquamarine;
+  }
+}
+.deleteBtn {
+  background-color: silver;
+  cursor: pointer;
+}
+.updateBtn {
+  background-color: rgb(103, 240, 194);
+  cursor: pointer;
+}
+.closeDialogBtn {
+  color: #aaa;
+  float: right;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  padding-left: 5px;
+  &:hover {
+    color: red;
+  }
+}
+.submitBtn {
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 10px;
+  background-color: rgb(91, 209, 170);
+  &:hover {
+    background-color: rgb(55, 184, 141);
+  }
+}

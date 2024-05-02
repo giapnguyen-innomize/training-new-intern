@@ -3,11 +3,12 @@ import { useState } from 'react';
 import { HotelUpdateDialog } from './PopupForms/HotelUpdateDialog';
 import { HotelCreateDialog } from './PopupForms/HotelCreateDialog';
 import { useHotelContext } from '../../context/HotelProvider';
+import styles from './hotel.module.scss';
+import { Button } from 'ui';
 import { HotelInfo } from 'models';
 import { deleteHotel, deleteImage } from 'hotel-api';
-import styles from './hotel.module.scss';
+import styles from '../../app.module.css';
 import { toast } from 'react-toastify';
-
 const initialState: HotelInfo = {
   name: '',
   hotelId: '',
@@ -49,12 +50,9 @@ export function HotelTable() {
 
   return (
     <div className={styles.container}>
-      <button
-        className={styles.container__createBtn}
-        onClick={() => setOpenCreate((pre) => !pre)}
-      >
+      <Button onClick={() => setOpenCreate((pre) => !pre)} theme="create">
         Add new hotel
-      </button>
+      </Button>
       <div>
         {openCreate && (
           <HotelCreateDialog
@@ -112,25 +110,20 @@ export function HotelTable() {
                 <img src={item?.image?.secureUrl} alt=""></img>
               </td>
               <td>
-                <button
-                  className={styles.container__updateBtn}
+                <Button
                   onClick={() => {
                     setDataUpdate(item);
                     setOpenUpdate(true);
                   }}
+                  theme="update"
                 >
-                  update
-                </button>
+                  Update
+                </Button>
               </td>
               <td>
-                <button
-                  className={styles.containter__deleteBtn}
-                  onClick={() => {
-                    handleDelete(item);
-                  }}
-                >
-                  delete
-                </button>
+                <Button onClick={() => handleDelete(item)} theme="delete">
+                  Delete
+                </Button>
               </td>
             </tr>
           </tbody>

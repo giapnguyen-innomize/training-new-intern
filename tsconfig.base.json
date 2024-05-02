@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "hotel-api": ["libs/api/hotel-api/src/index.ts"],
-      "models": ["libs/data-access/models/src/index.ts"]
+      "models": ["libs/data-access/models/src/index.ts"],
+      "ui": ["libs/fe/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
