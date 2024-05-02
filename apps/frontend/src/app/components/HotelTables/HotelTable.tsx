@@ -5,8 +5,7 @@ import { HotelUpdateDialog } from './PopupForms/HotelUpdateDialog';
 import { HotelCreateDialog } from './PopupForms/HotelCreateDialog';
 import { useHotelContext } from '../../context/HotelProvider';
 import styles from './hotel.module.scss';
-import { Button
-} from 'libs/fe/ui/src/lib/ui';
+import { Button } from 'libs/fe/ui/src/lib/ui';
 
 const initialState = {
   name: '',
@@ -64,15 +63,16 @@ export function HotelTable() {
       }
     }
   };
+
   if (!hotelInfoList) {
     return;
   }
+  
   return (
     <div className={styles.container}>
-      <Button
-        onClick={() => setOpenCreate((pre) => !pre)}
-        theme='createBtnCss'
-      >Add new hotel</Button>
+      <Button onClick={() => setOpenCreate((pre) => !pre)} theme="createBtnCss">
+        Add new hotel
+      </Button>
       <div>
         {openCreate && (
           <HotelCreateDialog
@@ -132,14 +132,15 @@ export function HotelTable() {
                     setDataUpdate(item);
                     setOpenUpdate(true);
                   }}
-                  theme='updateBtnCss'
-                >Update</Button>
+                  theme="updateBtnCss"
+                >
+                  Update
+                </Button>
               </td>
               <td>
-                <Button
-                  onClick={() => handleDelete(item)}
-                 theme='deleteBtnCss'
-                >Delete</Button>
+                <Button onClick={() => handleDelete(item)} theme="deleteBtnCss">
+                  Delete
+                </Button>
               </td>
             </tr>
           </tbody>

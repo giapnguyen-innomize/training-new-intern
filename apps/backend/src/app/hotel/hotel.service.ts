@@ -14,6 +14,7 @@ export class HotelService {
       endpoint: process.env.ENDPOINT_URL,
     });
   };
+
   // Get hotel table data
   async getData(tableName: string): Promise<object> {
     try {
@@ -28,6 +29,7 @@ export class HotelService {
       throw error;
     }
   }
+
   // Create new hotel item
   async addHotelData(hotelData: Hotel): Promise<ApiResponse> {
     const { hotelId, name, descript, image } = hotelData;
@@ -49,6 +51,7 @@ export class HotelService {
       return null;
     }
   }
+
   //update hotel item
   async updateHotelItem(
     hotelId: string,
@@ -71,6 +74,7 @@ export class HotelService {
       throw error;
     }
   }
+
   //Delete item
   async deleteHotelItem(
     hotelId: string,

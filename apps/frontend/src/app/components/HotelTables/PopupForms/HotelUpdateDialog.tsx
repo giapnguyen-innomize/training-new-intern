@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { initialState } from '../../../context/HotelProvider';
 import styles from './hotelUpdateDialog.module.scss';
-import { Button,Input } from 'libs/fe/ui/src/lib/ui';
+import { Button, InputForm } from 'libs/fe/ui/src/lib/ui';
 interface HotelUpdate {
   dataUpdate: any;
   setDataUpdate: any;
@@ -60,29 +60,13 @@ export const HotelUpdateDialog = ({
     <div className={styles.container}>
       <div className={styles.container__modal}>
         <h2>Update Hotel Information</h2>
-        <Button theme='closeDialogCss' onClick={() => setOpenUpdate(false)} >x</Button>
+        <Button theme="closeDialogCss" onClick={() => setOpenUpdate(false)}>
+          x
+        </Button>
         <form onSubmit={handleUpdate}>
           <div className={styles.container__formGroup}>
-            <div>
-              Hotel Name:
-              <Input
-                type="text"
-                readOnly
-                placeholder="Hotel Name"
-                name="name"
-                value={dataUpdate.name}
-              />
-            </div>
-            <div>
-              Hotel ID:
-              <Input
-                type="text"
-                readOnly
-                placeholder="Hotel Id"
-                name="hotelId"
-                value={dataUpdate.hotelId}
-              />
-            </div>
+            <InputForm>Hotel Name:</InputForm>
+            <InputForm>Hotel Id:</InputForm>
             <div>
               Hotel Image:
               <div>
@@ -101,7 +85,7 @@ export const HotelUpdateDialog = ({
               type="file"
               placeholder="Hotel Id"
               name="hotelId"
-              onChange={()=>handleChangeImg}
+              onChange={() => handleChangeImg}
             />
             <br />
             <div className={styles.container__formGroup}>
@@ -110,7 +94,7 @@ export const HotelUpdateDialog = ({
                 placeholder="Description..."
                 name="descript"
                 value={dataUpdate.descript}
-                onChange={()=>handleInputUpdate}
+                onChange={() => handleInputUpdate}
                 cols={40}
                 rows={3}
               />

@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { initialState } from '../../../context/HotelProvider';
 import styles from './hotelCreateDialog.module.scss';
-import { Button, Input } from 'libs/fe/ui/src/lib/ui';
+import { Button, InputForm } from 'libs/fe/ui/src/lib/ui';
+
 interface HotelCreate {
   formData: any;
   setFormData: any;
@@ -24,6 +25,7 @@ export const HotelCreateDialog = ({
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
   const handleCreate = async (e: any) => {
     e.preventDefault();
     formData = { ...formData, image };
@@ -57,42 +59,44 @@ export const HotelCreateDialog = ({
       console.error('Error uploading image:', error);
     }
   };
-  console.log({formData})
   return (
     <div className={styles.container}>
       <div className={styles.container__modal}>
-        <Button theme='closeDialogCss' onClick={() => setOpenCreate(false)} >x</Button>
+        <Button theme="closeDialogCss" onClick={() => setOpenCreate(false)}>
+          x
+        </Button>
         <div>
           <h2>Create Hotel Information</h2>
           <form onSubmit={handleCreate}>
-            <div style={{ display: 'block', padding: '10px' }}>
-              <div style={{ paddingBottom: '10px' }}>
-                Name:<br/>
-                <Input
-                  required
-                  type="text"
-                  placeholder="Hotel Name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputCreate}
-                />
+            <div>
+              <InputForm
+                required
+                type="text"
+                placeholder="Hotel Name"
+                name="name"
+                value={formData.name}
+                onChange={handleInputCreate}
+              >
+                Name:
+              </InputForm>
+
+              <InputForm
+                required
+                type="text"
+                placeholder="Hotel Id"
+                name="hotelId"
+                value={formData.hotelId}
+                onChange={handleInputCreate}
+              >
+                Hotel ID:
+              </InputForm>
+
+              <div>
+                Hotel's Image:
+                <img src={image && image.secureUrl} />
+                <input type="file" name="image" onChange={handleChangeImg} />
               </div>
               <div>
-                Hotel ID:
-                <Input
-                  required
-                  type="text"
-                  placeholder="Hotel Id"
-                  name="hotelId"
-                  value={formData.hotelId}
-                  onChange={handleInputCreate}
-                />
-              </div>
-              <br />
-              Hotel's Image: <br />
-              <img src={image && image.secureUrl} />
-              <input type="file" name="image" onChange={handleChangeImg} />
-              <div style={{ paddingTop: '10px' }}>
                 Description:
                 <br />
                 <textarea
@@ -104,7 +108,7 @@ export const HotelCreateDialog = ({
                 ></textarea>
               </div>
             </div>
-            <div style={{ alignItems: 'center', textAlign: 'center' }}>
+            <div>
               <Button theme="submitBtnCss">Create</Button>
             </div>
           </form>
